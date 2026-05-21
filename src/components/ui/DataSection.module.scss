@@ -1,0 +1,137 @@
+.dataSection {
+    margin: auto;
+    width: calc(100% - 2.5rem);
+
+    @media (min-width: 1248px) {
+        max-width: var(--max-width-container);
+        width: 100%;
+    }
+}
+
+.dataSectionInner {
+    background-color: var(--color-accent-blue);
+    color: var(--color-pure-white);
+    border-radius: var(--border-radius-hero);
+    padding: 3rem 1.25rem;
+    overflow: hidden;
+
+    @media (min-width: 480px) {
+        padding: 4rem 2rem;
+    }
+
+    @media (min-width: 768px) {
+        padding: 5rem 3rem;
+    }
+
+    @media (min-width: 1024px) {
+        padding: 6rem 5rem;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    align-items: stretch;
+    text-align: left;
+    padding: 0;
+
+    @media (min-width: 900px) {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(2rem, 6vw, 5rem);
+        text-align: center;
+    }
+}
+
+.leftColumn {
+    flex: 1;
+    max-width: none;
+    text-align: center;
+    container-type: inline-size;
+    container-name: data-intro;
+
+    @media (min-width: 900px) {
+        max-width: 480px;
+        margin-inline: auto;
+    }
+
+    .headline {
+        color: var(--color-pure-white);
+        font-size: clamp(1.75rem, 5cqi + 1rem, 3.5rem);
+        font-weight: 500;
+        margin-bottom: 0.75rem;
+        line-height: 1.1;
+
+        @media (min-width: 480px) {
+            margin-bottom: 1rem;
+            text-wrap: balance;
+        }
+    }
+
+    .description {
+        font-size: clamp(0.9375rem, 2cqi + 0.85rem, 1.25rem);
+        line-height: 1.6;
+        margin-bottom: 0;
+        color: var(--color-pure-white);
+
+        @media (min-width: 480px) {
+            text-wrap: balance;
+        }
+    }
+
+    .ctaButton {
+        background-color: var(--color-pure-white);
+        color: var(--color-primary-navy);
+    }
+}
+
+.rightColumn {
+    flex: 1;
+    width: 100%;
+    max-width: 560px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(1rem, 3vw, 2rem);
+    row-gap: clamp(1.5rem, 4vw, 3.5rem);
+    justify-items: center;
+
+    @media (min-width: 500px) {
+        max-width: none;
+        row-gap: clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .statItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        container-type: inline-size;
+        container-name: stat;
+
+        @media (min-width: 480px) {
+            gap: 0.5rem;
+        }
+    }
+
+    .statValue {
+        font-size: clamp(2rem, 18cqi, 4.5rem);
+        font-weight: 600;
+        line-height: 1.1;
+        color: var(--color-pure-white);
+        letter-spacing: -0.02em;
+    }
+
+    .statLabel {
+        font-size: clamp(0.75rem, 5.5cqi, 1.125rem);
+        color: var(--color-pure-white);
+        line-height: 1.4;
+        font-weight: 500;
+        text-wrap: balance;
+    }
+}

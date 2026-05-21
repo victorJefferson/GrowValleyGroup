@@ -1,0 +1,36 @@
+# GVV Website Project Tasks
+
+## Phase 0: Research & Planning (Completed)
+- [x] Analyze Vistra.com for design cloning (colors, typography, UI patterns).
+- [x] Analyze TaurusWealth.com for sitemap and structural cloning.
+- [x] Synthesize findings into a design and structure specification.
+- [x] Receive and parse Website Copy Document.
+
+## Phase 1: Codebase Setup
+- [x] Initialize Next.js application (SSG pattern).
+- [x] Configure Vanilla CSS with Vistra.com design tokens (colors, typography).
+- [x] Scaffold project directory (components, pages, assets, lib).
+
+## Phase 2: Core UX/UI Components (Vistra Design)
+- [x] Build Global Navbar (Sticky/Transparent to solid, responsive).
+- [x] Build Global Footer (Dark navy, 3-column layout).
+- [x] Build reusable UI Components: Pill Buttons, Rounded Cards.
+- [x] Build reusable Hero Section component (Deep rounded bottom-right corners).
+
+## Phase 3: Page Implementation (Taurus Structure + Copy)
+- [ ] Implement Home Page (`/`).
+- [ ] Implement About Us Page (`/about-us/`).
+- [ ] Implement Our Capabilities Page (`/our-capabilities/`) with sticky tab nav.
+- [ ] Implement Platform Page (`/platform/`).
+- [ ] Implement Team Page (`/team/`).
+- [ ] Implement Careers Page (`/careers/`).
+- [ ] Implement Legal Pages (`/privacy-policy/`, `/disclaimer/`).
+
+## Phase 4: Integrations (CMS & CRM)
+- [ ] CMS Integration (Sanity): Setup schemas for `Insights`.
+- [ ] CMS Integration (Sanity): Fetch Insights data into `/insights/` and Home Page.
+- [ ] CRM Integration (HubSpot): Create "Contact Us" form and connect to HubSpot API.
+
+## Phase 5: Demo Preparation
+- [ ] Final visual QA and responsiveness check.
+- [ ] First Client Demo (Codebase + Pages + CMS + CRM).

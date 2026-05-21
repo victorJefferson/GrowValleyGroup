@@ -1,0 +1,12 @@
+import { defineCloudflareConfig } from "@opennextjs/cloudflare";
+import staticAssetsIncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/static-assets-incremental-cache";
+
+/**
+ * Serve prerendered ISR/SSG output from static assets when possible (near-zero CPU).
+ * Required on Workers Free (10ms CPU/request); avoids 1102 after prefetch traffic.
+ * Content updates: redeploy after CMS changes (no on-demand revalidation with this cache).
+ */
+export default defineCloudflareConfig({
+	incrementalCache: staticAssetsIncrementalCache,
+	enableCacheInterception: true,
+});

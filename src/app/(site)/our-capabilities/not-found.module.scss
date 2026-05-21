@@ -1,0 +1,65 @@
+.container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-white);
+  padding: 160px 24px 80px; /* 160px top padding to clear the 80px Navbar + extra space */
+}
+
+.content {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.iconWrapper {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.iconCircle {
+  width: 96px;
+  height: 96px;
+  background-color: var(--color-hover-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heading {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--color-primary-navy);
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 48px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

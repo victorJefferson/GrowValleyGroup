@@ -1,0 +1,345 @@
+/*
+ * Brand palette – DARK THEME (single source of truth)
+ * Canvas: near-black · Primary: dark charcoal grey · Accent: warm coral
+ * Secondary: teal-cyan · Vibrant: magenta · All text on dark bg is white/light.
+ * Legacy --accent-blue aliases accent channels for hsla() in modules.
+ */
+:root {
+  /* Primary — dark charcoal grey (surfaces, buttons, banners) */
+  --primary-h: 220;
+  --primary-s: 12%;
+  --primary-l: 18%;
+
+  --color-primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+  --color-primary-light: hsl(var(--primary-h), 10%, 28%);
+  --color-primary-dark: hsl(var(--primary-h), 14%, 12%);
+
+  /* Light text on dark primary fills */
+  --color-on-primary: #f5f5f5;
+  --color-on-primary-muted: hsla(0, 0%, 100%, 0.72);
+  --color-on-primary-subtle: hsla(0, 0%, 100%, 0.55);
+
+  /*
+   * Near-white heading color — readable on the dark canvas.
+   * (Replaces the old dark-navy heading token from the light theme.)
+   */
+  --color-primary-navy: hsl(0, 0%, 93%);
+
+  /* Accent — warm coral / orange (CTAs, emphasis, tags — slightly boosted for dark bg) */
+  --accent-h: 17;
+  --accent-s: 90%;
+  --accent-l: 58%;
+  --color-accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
+
+  /* All section / hero eyebrows use this token */
+  --color-eyebrow: var(--color-accent);
+
+  /* Vibrant accent — hot magenta / pink (highlights, gradient endpoints, dots) */
+  --accent-vibrant-h: 328;
+  --accent-vibrant-s: 85%;
+  --accent-vibrant-l: 58%;
+  --color-accent-vibrant: hsl(var(--accent-vibrant-h), var(--accent-vibrant-s), var(--accent-vibrant-l));
+
+  /*
+   * Legacy "accent-blue" — aliases accent so hsla(var(--accent-blue-h), …) stays valid everywhere.
+   */
+  --accent-blue-h: var(--accent-h);
+  --accent-blue-s: var(--accent-s);
+  --accent-blue-l: var(--accent-l);
+  --color-accent-blue: hsl(var(--accent-blue-h), var(--accent-blue-s), var(--accent-blue-l));
+  --color-accent-blue-soft: hsla(var(--accent-blue-h), var(--accent-blue-s), var(--accent-blue-l), 0.14);
+
+  /* Secondary — teal / cyan (complements the charcoal primary) */
+  --secondary-h: 175;
+  --secondary-s: 55%;
+  --secondary-l: 45%;
+  --color-secondary: hsl(var(--secondary-h), var(--secondary-s), var(--secondary-l));
+
+  /* Highlight — golden amber (badges, secondary emphasis — use sparingly) */
+  --highlight-h: 43;
+  --highlight-s: 96%;
+  --highlight-l: 56%;
+  --color-highlight: hsl(var(--highlight-h), var(--highlight-s), var(--highlight-l));
+
+  /* Dark surfaces — progressively lighter shades of the charcoal base */
+  --color-surface-1: hsl(var(--primary-h), 10%, 11%);
+  --color-surface-2: hsl(var(--primary-h), 10%, 14%);
+  --color-surface-3: hsl(var(--primary-h), 8%, 20%);
+
+  /* Legacy variable mappings for backward compatibility */
+  --color-hero-gradient-start: var(--color-primary-dark);
+  --color-hero-gradient-end: var(--color-primary);
+  --color-surface-secondary: var(--color-surface-2);
+  --color-surface-tertiary: var(--color-surface-3);
+
+  /* Canvas — near-black (was white in the light theme) */
+  --color-white: #0a0a0a;
+
+  /* Actual white — for text on dark/colored fills (hero headlines, accent panels, etc.) */
+  --color-pure-white: #FFFFFF;
+
+  /*
+   * Light-surface CTAs on dark heroes / banners (fills + text strictly from palette).
+   * Use these instead of --color-white (--color-white is the dark canvas alias).
+   */
+  --color-cta-inverse-fill: var(--color-pure-white);
+  --color-cta-inverse-fill-hover: var(--color-on-primary);
+  --color-cta-inverse-text: hsl(0, 0%, 9%);
+
+  /* Text — light on dark canvas */
+  --color-text-body: hsl(0, 0%, 88%);
+  --color-text-muted: hsl(var(--primary-h), 8%, 58%);
+  --color-footer-bg: var(--color-primary-dark);
+
+  /* ── Borders & dividers (light strokes on dark backgrounds) ── */
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.18);
+
+  /* Hover / interactive surface (slightly lighter than canvas) */
+  --color-hover-bg: hsl(var(--primary-h), 10%, 14%);
+
+  /* Brand gradient — charcoal fills */
+  --color-banner-gradient: linear-gradient(
+    110deg,
+    var(--color-primary-dark) 0%,
+    var(--color-primary) 45%,
+    var(--color-primary-light) 100%
+  );
+
+  /* Typography & Layout */
+  --font-family-sans: var(--font-sans), sans-serif;
+  --font-size-base: 18px;
+  --line-height-base: 1.6;
+
+  --border-radius-pill: 50px;
+  --border-radius-card: 20px;
+  --border-radius-hero: 40px;
+
+  --max-width-container: 1200px;
+
+  /* ── Section spacing scale (single source of truth) ──
+     Adjust these three values to control all between-section
+     vertical space across the entire site. */
+  --section-gap-sm: 3rem;
+  /* mobile            */
+  --section-gap-md: 3rem;
+  /* tablet  ≥ 768px   */
+  --section-gap-lg: 3rem;
+  /* desktop ≥ 1024px  */
+  --section-gap: var(--section-gap-sm);
+}
+
+/* Base Resets */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  color: var(--color-text-body);
+  background-color: var(--color-white);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  width: 100%;
+}
+
+/* Root layout resets */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-primary-navy);
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  /* Reduced minimum for mobile fit */
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.3;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Global utility classes */
+.container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
+}
+
+/* Promote --section-gap alias at each breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --section-gap: var(--section-gap-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-gap: var(--section-gap-lg);
+  }
+}
+
+.section-padding {
+  padding-top: var(--section-gap);
+  padding-bottom: var(--section-gap);
+}
+
+/* Canonical section title, use on all page h2 headings */
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-primary-navy);
+  margin-bottom: 1rem;
+}
+
+/* Canonical section eyebrow label */
+.section-eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-eyebrow);
+  margin-bottom: 1rem;
+}
+
+/* Canonical section body / description */
+.section-body {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.siteWrapper {
+  overflow-x: clip;
+  width: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Trust Guard cookie banner – dark theme overrides ──
+   The library hard-codes light colors in its CSS module.
+   We target the banner via the inline --tg-bg variable it sets. */
+[style*="--tg-bg"] {
+  background: var(--tg-bg, var(--color-white)) !important;
+
+  /* Header (logo row) */
+  > header {
+    border-bottom-color: var(--color-border) !important;
+  }
+
+  /* Tab navigation */
+  > nav {
+    border-bottom-color: var(--color-border) !important;
+
+    button {
+      color: var(--color-text-muted) !important;
+
+      &:hover {
+        background: var(--color-hover-bg) !important;
+      }
+    }
+  }
+
+  /* Content pane */
+  > main {
+    color: var(--color-text-body) !important;
+
+    h3 {
+      color: var(--color-primary-navy) !important;
+    }
+
+    p {
+      color: var(--color-text-muted) !important;
+    }
+
+    /* Category rows in "Details" tab */
+    > div > div {
+      border-bottom-color: var(--color-border-subtle) !important;
+
+      h3 {
+        color: var(--color-primary-navy) !important;
+      }
+
+      p {
+        color: var(--color-text-muted) !important;
+      }
+    }
+  }
+
+  /* Footer (buttons row) */
+  > footer {
+    background: var(--color-surface-1) !important;
+    border-top-color: var(--color-border) !important;
+
+    /* Outline / secondary button (first in row) */
+    button:first-child {
+      background: var(--color-surface-2) !important;
+      border-color: var(--color-border-strong) !important;
+      color: var(--color-text-body) !important;
+
+      &:hover {
+        border-color: var(--color-text-muted) !important;
+      }
+    }
+  }
+
+  /* Links inside the "About" tab */
+  a {
+    color: var(--color-accent) !important;
+  }
+}

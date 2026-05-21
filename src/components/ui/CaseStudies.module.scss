@@ -1,0 +1,213 @@
+/* ── Case Studies Section ── */
+
+// Outer panel: dark brand gradient (matching reference design)
+.caseStudiesPanel {
+    background: var(--color-banner-gradient);
+    border-radius: var(--border-radius-hero);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+
+    @media (min-width: 1024px) {
+        grid-template-columns: 1fr 1.6fr;
+        min-height: 420px;
+    }
+}
+
+// Left: intro block
+.caseStudiesIntro {
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+
+    @media (min-width: 768px) {
+        padding: 4rem 3rem;
+    }
+
+    @media (min-width: 1024px) {
+        padding: 4.5rem 4rem;
+        border-right: 1px solid hsla(0, 0%, 0%, 0.08);
+    }
+}
+
+.csEyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-eyebrow);
+    display: block;
+}
+
+.csHeading {
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-on-primary);
+    margin: 0;
+}
+
+.csBody {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-on-primary-muted);
+    max-width: 340px;
+    margin: 0;
+}
+
+// Right: carousel pane
+.caseStudiesRight {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 2rem 2.5rem;
+    gap: 2rem;
+    overflow: hidden;
+
+    @media (min-width: 1024px) {
+        padding: 4rem 3.5rem 3rem 3rem;
+    }
+}
+
+// Scrollable card track
+.carouselTrack {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+// Individual card wrapper (anchor or div)
+.cardWrapper {
+    flex: 0 0 clamp(240px, 55%, 320px);
+    scroll-snap-align: start;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+
+    // Peek effect: show leading edge of next card
+    &:last-child {
+        margin-right: 2rem;
+    }
+}
+
+// Card itself
+.card {
+    background-color: var(--color-white);
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    &:hover .cardImage {
+        transform: scale(1.04);
+    }
+}
+
+// Image pane (top ~55% of card)
+.cardImagePane {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+// Card text body (bottom)
+.cardBody {
+    padding: 1.5rem 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.cardTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--color-primary-navy);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.cardFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cardPill {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-vibrant);
+    background-color: hsla(var(--primary-h), 40%, 90%, 0.6);
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+}
+
+.cardArrow {
+    font-size: 1.1rem;
+    color: var(--color-primary-navy);
+    font-weight: 400;
+    transition: transform 0.2s ease;
+
+    .cardWrapper:hover & {
+        transform: translateX(4px);
+    }
+}
+
+// Navigation buttons
+.carouselNav {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navBtn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background-color: hsla(0, 0%, 0%, 0.08);
+    color: var(--color-on-primary);
+    font-size: 1.05rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+
+    &:hover:not(:disabled) {
+        background-color: hsla(0, 0%, 0%, 0.14);
+    }
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: default;
+    }
+}

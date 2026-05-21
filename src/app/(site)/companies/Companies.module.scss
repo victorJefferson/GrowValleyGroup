@@ -1,0 +1,79 @@
+/* ── Dark Positioning Block ── */
+.darkBlock {
+    background: linear-gradient(
+        hsla(var(--primary-h), var(--primary-s), 10%, 0.95),
+        hsla(var(--primary-h), var(--primary-s), 10%, 0.95)
+    ),
+    url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1400');
+    background-size: cover;
+    background-position: center;
+    padding: 6rem 0;
+    color: var(--color-pure-white);
+}
+
+.darkBlockInner {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.darkBlockStatement {
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-pure-white);
+    margin: 0;
+}
+
+.darkBlockBody {
+    font-size: clamp(1rem, 1.5vw, 1.175rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.72);
+    margin: 0;
+    max-width: 680px;
+    align-self: center;
+}
+
+/* ── Stats Strip ── */
+.statsStripSection {
+    background-color: var(--color-surface-1);
+    border-top: 1px solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.08);
+    border-bottom: 1px solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.08);
+    padding: 2.5rem 0;
+}
+
+.statsStrip {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem 2.5rem;
+
+    @media (min-width: 1024px) {
+        gap: 1.5rem 3.5rem;
+        justify-content: space-between;
+    }
+}
+
+.statsStripItem {
+    flex: 1 1 200px;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.statsStripText {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-primary-navy);
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+}

@@ -1,0 +1,21 @@
+.legalContent {
+    max-width: 800px;
+    margin: 0 auto;
+    
+    h2 {
+        font-size: 1.5rem;
+        color: var(--color-primary-navy);
+        margin: 3rem 0 1.5rem;
+        
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+    
+    p {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--color-text-muted);
+        margin-bottom: 2rem;
+    }
+}

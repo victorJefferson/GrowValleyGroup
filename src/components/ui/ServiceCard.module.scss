@@ -1,0 +1,104 @@
+.serviceCard {
+  display: flex;
+  flex: 1; // Force stretch
+  flex-direction: column;
+  align-items: center; // Center children horizontally
+  text-align: center; // Center text content
+  padding: 2.5rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-surface-3);
+  border-radius: var(--border-radius-card);
+  height: 100%;
+  width: 100%; // Ensure it fills the flex child space
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: center;
+  }
+
+  &:hover {
+    transform: translateY(-12px);
+    border-color: transparent;
+    box-shadow: 0 25px 60px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.12);
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .arrow {
+      transform: translateX(6px);
+    }
+    
+    .iconWrapper {
+        color: var(--color-on-primary);
+        background: var(--color-primary);
+        transform: scale(1.05);
+    }
+
+    .ctaLabel {
+        letter-spacing: 0.02em;
+    }
+  }
+
+  .iconWrapper {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem auto; // Force centering
+    color: var(--color-primary-light);
+    background: var(--color-surface-1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--color-primary-navy);
+  }
+
+  .description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center; // Center the footer
+    gap: 0.75rem;
+    padding-top: 1rem;
+  }
+
+  .ctaLabel {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    transition: color 0.3s ease;
+  }
+
+  .arrow {
+    color: var(--color-accent-blue);
+    transition: all 0.3s ease;
+  }
+}

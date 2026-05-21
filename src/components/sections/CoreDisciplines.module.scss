@@ -1,0 +1,128 @@
+.coreDisciplinesSection {
+    padding: var(--section-gap) 0;
+}
+
+.coreDisciplinesHeader {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.coreDisciplinesEyebrow {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-eyebrow);
+    display: block;
+}
+
+.coreDisciplinesGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+    }
+}
+
+.disciplineTile {
+    background-color: var(--color-surface-tertiary);
+    border: 1px solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem 2.5rem;
+    min-height: 280px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 0;
+    
+    @media (min-width: 1024px) {
+        min-height: 340px;
+        padding: 4rem 3.5rem;
+    }
+    
+    &:hover {
+        background-color: var(--color-white);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+        .tileArrow {
+            transform: translateX(5px);
+            color: var(--color-accent-vibrant);
+        }
+    }
+}
+
+/* Corner Rounding Logic: Treat the entire grid as a single rounded block */
+
+/* MOBILE ONLY (1 column): First row gets top corners, last row gets bottom corners */
+@media (max-width: 767px) {
+    .disciplineTile:first-child {
+        border-top-left-radius: var(--border-radius-card);
+        border-top-right-radius: var(--border-radius-card);
+    }
+
+    .disciplineTile:last-child {
+        border-bottom-left-radius: var(--border-radius-card);
+        border-bottom-right-radius: var(--border-radius-card);
+    }
+}
+
+/* TABLET/DESKTOP (2 columns): Only the absolute 4 outer corners are rounded */
+@media (min-width: 768px) {
+    /* Top Left Corner -> Tile 1 (index 1) */
+    .disciplineTile:nth-child(1) {
+        border-top-left-radius: var(--border-radius-hero);
+    }
+
+    /* Top Right Corner -> Tile 2 (index 2) */
+    .disciplineTile:nth-child(2) {
+        border-top-right-radius: var(--border-radius-hero);
+    }
+
+    /* Bottom Left Corner -> Tile 3 (index 3) */
+    .disciplineTile:nth-child(3) {
+        border-bottom-left-radius: var(--border-radius-hero);
+    }
+
+    /* Bottom Right Corner -> Tile 4 (index 4) */
+    .disciplineTile:nth-child(4) {
+        border-bottom-right-radius: var(--border-radius-hero);
+    }
+}
+
+.tileIndex {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-accent-vibrant);
+    letter-spacing: 0.15em;
+    margin-bottom: 3rem;
+    display: block;
+}
+
+.tileBottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: auto;
+}
+
+.tileTitle {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 500;
+    color: var(--color-primary-navy);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0;
+    max-width: 85%;
+}
+
+.tileArrow {
+    color: var(--color-text-muted);
+    transition: all 0.3s ease;
+    margin-bottom: 0.5rem;
+}

@@ -1,0 +1,302 @@
+.section {
+    padding: 4rem 0;
+
+    @media (min-width: 1024px) {
+        padding: 6rem 0;
+    }
+}
+
+.bgLight {
+    background-color: var(--color-surface-tertiary);
+}
+
+.eyebrow {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-eyebrow);
+    margin-bottom: 1rem;
+}
+
+.sectionHeader {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+
+    h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 600;
+        color: var(--color-primary-navy);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.25rem;
+    }
+
+    p {
+        font-size: 1.125rem;
+        color: var(--color-text-muted);
+        line-height: 1.65;
+    }
+}
+
+.statsSectionWrap {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+
+    @media (min-width: 1024px) {
+        padding-top: 2.5rem;
+        padding-bottom: 4rem;
+    }
+}
+
+.statsSectionHeadline {
+    text-align: center;
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    color: var(--color-primary-navy);
+    margin: 0 auto 2rem;
+    max-width: 720px;
+}
+
+/* Impact stats line */
+.impactStats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.1);
+    border-bottom: 1px solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.1);
+    margin-bottom: 3rem;
+}
+
+.impactStat {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .num {
+        font-size: clamp(2rem, 4vw, 2.75rem);
+        font-weight: 700;
+        color: var(--color-primary-navy);
+        letter-spacing: -0.02em;
+    }
+
+    .lbl {
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+        line-height: 1.4;
+    }
+
+    &.impactStatLabelOnly .lbl {
+        font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+        font-weight: 600;
+        color: var(--color-primary-navy);
+        max-width: 280px;
+        margin: 0 auto;
+    }
+}
+
+/* Expertise area cards */
+.areasGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1280px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.areaCard {
+    background-color: var(--color-white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-card);
+    border: 1px solid var(--color-surface-secondary);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    h3 {
+        font-size: 1.5rem;
+        color: var(--color-primary-navy);
+        line-height: 1.2;
+    }
+
+    p {
+        font-size: 1rem;
+        color: var(--color-text-muted);
+        line-height: 1.65;
+    }
+
+    ul {
+        list-style: disc;
+        padding-left: 1.25rem;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        li {
+            font-size: 0.95rem;
+            color: var(--color-primary-navy);
+            line-height: 1.55;
+        }
+    }
+}
+
+.areaOutcomesLabel {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-eyebrow);
+    margin-top: 0.25rem;
+}
+
+.areaCta {
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+/* Engagement principles */
+.principlesGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.howWeEngageSection {
+    background-color: var(--color-white);
+}
+
+.howWeEngageHeader {
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto 2.5rem;
+
+    h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 600;
+        color: var(--color-primary-navy);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.1rem;
+    }
+
+    p {
+        font-size: 1.08rem;
+        color: var(--color-text-muted);
+        line-height: 1.65;
+        margin: 0 auto 0.75rem;
+        max-width: 760px;
+    }
+}
+
+.principlesGrid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @media (min-width: 900px) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+    }
+}
+
+.principle {
+    position: relative;
+    padding: 0.25rem 0 0.35rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    text-align: center;
+    border-left: 2px solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.18);
+
+    @media (min-width: 900px) {
+        padding: 0.25rem 1.15rem 0.35rem;
+        border-left: none;
+
+        &:not(:first-child)::before {
+            content: "";
+            position: absolute;
+            left: -1rem;
+            top: 0.2rem;
+            bottom: 0.2rem;
+            width: 1px;
+            background: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.15);
+        }
+    }
+
+    .principleNum {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: var(--color-eyebrow);
+        letter-spacing: 0.12em;
+        margin-bottom: 0.15rem;
+        text-align: center;
+    }
+
+    h4 {
+        font-size: 1.18rem;
+        color: var(--color-primary-navy);
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    p {
+        font-size: 0.97rem;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        margin: 0;
+        text-align: center;
+    }
+}
+
+.howWeEngageCtaWrap {
+    margin-top: 2rem;
+}
+
+/* Closing differentiator block */
+.closing {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: var(--border-radius-hero);
+
+    h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.5rem;
+        color: var(--color-on-primary);
+    }
+
+    p {
+        font-size: 1.125rem;
+        line-height: 1.75;
+        margin-bottom: 1.25rem;
+        opacity: 0.9;
+
+        &:last-of-type {
+            margin-bottom: 2rem;
+        }
+    }
+}

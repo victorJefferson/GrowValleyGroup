@@ -1,0 +1,50 @@
+# Reference Websites Analysis for GVV
+
+This document synthesizes the web design and sitemap analysis for the two reference websites: **Vistra.com** (Design Target) and **TaurusWealth.com** (Structure Target).
+
+## 1. Design Specification (Cloned from Vistra.com)
+
+**Color System:**
+- **Primary Navy:** `#0012B7` (Buttons, bold headings, logo)
+- **Hero Gradient:** `#000B7D` to `#003BD1`
+- **Secondary Backgrounds:** `#EDF2F6`, `#F4F7F9`
+- **Accent Light Blue:** `#99D9EA` (Decorative elements, hover states)
+- **Surface:** `#FFFFFF`
+
+**Typography:**
+- **Font Family:** *Outfit* or *Montserrat* (to mimic the geometric sans-serif *VistraSans*).
+- **Headings:** Bold weights, tight letter-spacing. Hero H1s at 64px-72px.
+- **Body:** Regular weight, 16px-18px, 1.6 line-height.
+
+**UI Components:**
+- **Buttons:** Fully rounded "pill" shapes (50px border-radius).
+- **Hero Containers:** Deep rounded corners on bottom-right (40px-60px radius).
+- **Cards:** Clean surfaces with 20px rounded corners and extremely minimal shadows (depth via color contrast).
+
+## 2. Structure & Sitemap (Cloned from TaurusWealth.com)
+
+**Sitemap / Global Navigation:**
+1. **Home** (`/`)
+2. **About Us** (`/about-us`)
+3. **Our Expertise** (`/our-expertise`) - Hub for specific services.
+    *   Wealth Management Services
+    *   Wealth Structuring & Succession Planning
+    *   Additional Family Office Services
+    *   Privé Access (PE, VC, Real Estate)
+4. **News & Insights** (`/news`) - CMS powered.
+5. **Digital Portal** (`/digital`)
+6. **Careers** (`/careers`)
+7. **Team** (`/team`)
+
+**Homepage Flow (Top to Bottom):**
+1. **Hero Section:** Full-width background (video/image) with large, clean overlay text.
+2. **Introduction:** Split-screen layout (text + image slider/gallery).
+3. **Key Stats Bar:** High-contrast, full-width data points bar.
+4. **Our Expertise Grid:** 2x2 grid of service cards (icon + title + description).
+5. **Awards & Recognition:** Institutional credibility section.
+6. **Latest News / Insights:** Filterable CMS grid.
+7. **Contact / Locations (Footer):** Global office locations and contact details.
+
+**Layout Paradigm:**
+- **Boxed-within-full-width:** Backgrounds span 100vw, but content is constrained to a central max-width container (e.g., 1200px) for an institutional, spaced-out feel.
+- **Visual Hierarchy:** Large typography and generous white-space.

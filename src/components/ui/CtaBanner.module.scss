@@ -1,0 +1,31 @@
+.ctaBanner {
+    padding-block: var(--section-gap);
+}
+
+.ctaBannerPanel {
+    background: var(--color-banner-gradient);
+    border-radius: var(--border-radius-hero);
+    padding: clamp(2.25rem, 5vw, 4rem) 1.5rem;
+    text-align: center;
+    overflow: hidden;
+
+    @media (min-width: 768px) {
+        padding: clamp(2.75rem, 5vw, 4.5rem) 2.5rem;
+    }
+}
+
+.headline {
+    color: var(--color-on-primary);
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+}
+
+.description {
+    color: var(--color-on-primary-muted);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin: 0 auto 1.85rem;
+    max-width: 46rem;
+}

@@ -1,0 +1,84 @@
+.base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-pill);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.2);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.primary {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+
+    &:hover {
+        background-color: var(--color-primary-dark);
+    }
+}
+
+.secondary {
+    background-color: var(--color-white);
+    color: var(--color-primary-navy);
+
+    &:hover {
+        background-color: var(--color-surface-secondary);
+    }
+}
+
+.outline {
+    background-color: transparent;
+    color: var(--color-primary-navy);
+    border: 2px solid var(--color-primary-navy);
+
+    &:hover {
+        background-color: var(--color-primary);
+        color: var(--color-on-primary);
+    }
+}
+
+/* High-contrast CTA on dark sections — semantic inverse tokens */
+.advisor {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--color-cta-inverse-fill);
+    color: var(--color-cta-inverse-text);
+    border-radius: 6px;
+    border: none;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+
+    &:hover {
+        background-color: var(--color-cta-inverse-fill-hover);
+        color: var(--color-cta-inverse-text);
+        box-shadow: 0 6px 20px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.35);
+    }
+}
+
+.md {
+    padding: 0.75rem 2rem;
+}
+
+.lg {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+}
+
+.sm {
+    padding: 0.5rem 1.5rem;
+}

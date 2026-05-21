@@ -1,0 +1,358 @@
+/*
+  Hero – Full-Bleed, Full-Viewport-Height
+  =========================================
+  • Stretches edge-to-edge (zero horizontal margin / padding on the shell)
+  • Height = 100dvh minus the 80 px fixed navbar
+  • All type sizes are intentionally FIXED – no responsive overrides
+  • The background image fills the entire section; a gradient overlay
+    keeps text legible on the left half
+*/
+
+/* ── Shell ── */
+.heroSection {
+    /* Position directly below the fixed 80 px navbar */
+    margin-top: 80px;
+
+    /* Fill the remaining viewport height exactly */
+    height: calc(100dvh - 80px);
+    min-height: 500px; /* safety floor for very short viewports */
+
+    /* Edge-to-edge: no horizontal margin/padding on the section itself */
+    width: 100%;
+
+    /* Stack everything relative to this box */
+    position: relative;
+    overflow: hidden;
+
+    background-color: hsl(var(--primary-h), 40%, 5%);
+
+    &.isShort {
+        /* Taller shell so padding + centered copy don’t feel crushed */
+        height: 58vh;
+        min-height: 540px;
+
+        @media (max-width: 767px) {
+            height: 64vh;
+            min-height: 460px;
+        }
+
+        /* Generous symmetric inset — pillar / policy heroes read as “framed” text blocks */
+        .heroInner {
+            padding-top: clamp(4.25rem, 14vmin, 9rem);
+            padding-bottom: clamp(4.25rem, 14vmin, 9rem);
+
+            @media (max-width: 767px) {
+                padding-top: clamp(3.5rem, 16vmin, 6.5rem);
+                padding-bottom: clamp(3.5rem, 16vmin, 6.5rem);
+            }
+        }
+
+        /* Uniform rhythm between text blocks (replaces mixed margins on children) */
+        .heroContent {
+            gap: clamp(1.35rem, 3.6vmin, 2rem);
+        }
+
+        .eyebrow {
+            margin-bottom: 0;
+        }
+
+        .headline {
+            margin-bottom: 0;
+            font-size: 3.5rem; /* Slightly smaller than full hero (4.25rem) */
+            
+            @media (max-width: 767px) {
+                font-size: 2.25rem;
+            }
+        }
+
+        .subheadline {
+            margin-bottom: 0;
+        }
+    }
+}
+
+/* ── Full-bleed background image ── */
+.heroBg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    /* subtle scale-in on load */
+    animation: bgReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes bgReveal {
+    from { transform: scale(1.04); opacity: 0.7; }
+    to   { transform: scale(1);    opacity: 1;   }
+}
+
+/* ── Gradient overlay (left-heavy, matching reference) ── */
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10; /* High z-index to stay above background image */
+    /* Strong dark on the left for text, gentle fade to transparent on the right */
+    background: linear-gradient(
+        105deg,
+        hsl(var(--primary-h), 40%, 4%) 0%,
+        hsl(var(--primary-h), 40%, 6%) 30%,
+        hsla(var(--primary-h), 35%, 8%, 0.75) 55%,
+        hsla(var(--primary-h), 30%, 10%, 0.25) 80%,
+        transparent 100%
+    );
+
+    @media (max-width: 767px) {
+        /* On mobile, use an extremely dark and visible overlay to guarantee text legibility */
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.3) 50%,
+            rgba(0, 0, 0, 0.9) 100%
+        ) !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* ── Content layer ── */
+.heroInner {
+    position: relative;
+    z-index: 20; /* Higher than overlay */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Horizontal padding lives here, not on the section shell */
+    padding: 0 6vw;
+
+    @media (max-width: 767px) {
+        padding: 0 1.5rem; /* Standard mobile padding */
+    }
+
+    /* On very wide screens, align content with the max-width container */
+    @media (min-width: 1600px) {
+        padding: 0 calc((100vw - 1400px) / 2);
+    }
+}
+
+.heroSection.hasTrustRail:not(.isShort) .heroInner {
+    padding-bottom: clamp(4rem, 10vmin, 5.25rem);
+}
+
+/* ── Content width constraint (left half) ── */
+.heroContent {
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* controlled by individual child margins */
+    animation: contentReveal 0.9s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes contentReveal {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Eyebrow ── */
+.eyebrow {
+    display: block;
+    font-size: 0.8rem;         /* Default Size */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-eyebrow);
+    margin-bottom: 1.25rem;
+
+    @media (max-width: 767px) {
+        font-size: 0.75rem;    /* Slightly smaller for mobile */
+        margin-bottom: 1rem;
+    }
+}
+
+/* ── Headline ── */
+.headline {
+    font-size: 4.25rem;        /* Default Desktop Size */
+    font-weight: 600;          /* Increased from 300 to be bolder */
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-pure-white);
+    margin: 0 0 1.75rem 0;
+    white-space: pre-line;
+    word-wrap: break-word;     /* Ensure long words wrap on narrow screens */
+
+    @media (max-width: 767px) {
+        font-size: 2.75rem;    /* Reduced size for mobile to prevent clipping */
+        line-height: 1.15;
+        font-weight: 300;      /* Keep mobile lighter if preferred, or remove this to make mobile bold too */
+    }
+
+    strong {
+        font-weight: 700;
+        color: var(--color-pure-white);
+    }
+}
+
+/* ── Subheadline (with animated left accent bar) ── */
+.subheadline {
+    font-size: 2.1rem;         /* Doubled from 1.05rem */
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0 0 2.25rem 0;
+    padding-left: 2rem;
+    position: relative;
+    max-width: 800px;          /* Increased from 500px to accommodate larger text */
+    white-space: pre-line;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2px;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.35);
+        transform-origin: top;
+        animation: animateLine 1.5s 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    @media (max-width: 767px) {
+        font-size: 0.95rem;    /* Kept original mobile size */
+        max-width: 100%;       /* Allow full width on mobile */
+        margin-bottom: 2rem;
+        padding-left: 1rem;
+        
+        &::before {
+            animation: none;   /* Disable animation on mobile if not desired */
+            height: 100%;
+            transform: scaleY(1);
+        }
+        
+        /* Fallback for mobile if pseudo-element is tricky */
+        border-left: 2px solid rgba(255, 255, 255, 0.35);
+    }
+}
+
+@keyframes animateLine {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+}
+
+/* Stacked lines on photo hero (no immersive blob canvas) */
+.stackedHeadingOnImage {
+    margin: 0 0 1.75rem;
+    padding: 0;
+    font-size: clamp(2.85rem, 8vw, 5.75rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+
+    span {
+        display: block;
+    }
+}
+
+.stackedOnImageStrong {
+    color: var(--color-pure-white);
+}
+
+.stackedOnImageMuted {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+/* ── CTA group ── */
+.ctaGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* ── Trusted-by rail (photo hero; omitted when `.isShort`) ── */
+.trustedBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 25;
+    padding: 1.1rem 6vw 1.35rem;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.875rem, 2.5vw, 1.65rem);
+    background: linear-gradient(to top, hsla(var(--primary-h), 42%, 3%, 0.28), transparent 70%);
+
+    @media (min-width: 1600px) {
+        padding-left: calc((100vw - 1400px) / 2);
+        padding-right: calc((100vw - 1400px) / 2);
+    }
+}
+
+.trustedLine {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 1.5rem;
+    max-width: min(42vw, 13.5rem);
+    height: 1px;
+    flex-shrink: 0;
+    border: none;
+    transform-origin: left center;
+    animation: trustedLineReveal 1.35s 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.06) 12%,
+        rgba(255, 255, 255, 0.42) 100%
+    );
+}
+
+@keyframes trustedLineReveal {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+@keyframes trustedLabelReveal {
+    from {
+        opacity: 0;
+        transform: translate3d(-0.6rem, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.trustedLabel {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    line-height: 1.35;
+    flex: 0 1 auto;
+    min-width: 0;
+    color: hsla(0, 0%, 100%, 0.48);
+    animation: trustedLabelReveal 0.95s 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .trustedLine {
+        animation: none;
+        transform: scaleX(1);
+        opacity: 1;
+    }
+
+    .trustedLabel {
+        animation: none;
+        transform: none;
+        opacity: 1;
+    }
+}

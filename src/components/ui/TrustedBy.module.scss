@@ -1,0 +1,13 @@
+.trustedBy {
+    background-color: var(--color-surface-tertiary);
+    padding: 1.25rem 0;
+    border-bottom: 1px solid hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.05);
+
+    p {
+        margin: 0;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--color-text-muted);
+        letter-spacing: 0.02em;
+    }
+}

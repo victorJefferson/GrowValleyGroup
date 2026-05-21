@@ -1,0 +1,127 @@
+.impactBand {
+    background-color: var(--color-white);
+    color: var(--color-pure-white);
+    padding: var(--section-gap) 0;
+}
+
+.inner {
+    text-align: center;
+}
+
+.eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 0 0 2rem;
+}
+
+.copyBlock {
+    max-width: 42rem;
+    margin: 0 auto 2rem;
+}
+
+.headline {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 500;
+    color: var(--color-pure-white);
+    margin: 0 0 0.75rem;
+}
+
+.description {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.rule {
+    height: 1px;
+    width: 100%;
+    max-width: var(--max-width-container);
+    margin: 0 auto;
+    background: var(--color-border);
+}
+
+.grid {
+    --impact-cols: 4;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 0.65rem;
+    padding: 1.5rem 0;
+    margin: 0 auto;
+    max-width: var(--max-width-container);
+    overflow-x: visible;
+
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(var(--impact-cols), minmax(0, 1fr));
+        gap: clamp(1rem, 2vw, 2rem);
+        padding: 3.5rem 0;
+    }
+}
+
+.col {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.4rem;
+
+    @media (min-width: 1024px) {
+        gap: 0.65rem;
+    }
+}
+
+.value {
+    font-size: clamp(1.35rem, 5.25vw, 1.95rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--color-pure-white);
+    line-height: 1;
+
+    @media (min-width: 1024px) {
+        font-size: clamp(2rem, 4.2vw, 3.25rem);
+    }
+}
+
+.mid {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-pure-white);
+
+    @media (min-width: 1024px) {
+        font-size: 1.125rem;
+    }
+}
+
+.fine {
+    margin: 0;
+    max-width: 15rem;
+    font-size: 0.75rem;
+
+    @media (min-width: 1024px) {
+        font-size: 0.875rem;
+    }
+    line-height: 1.45;
+    color: var(--color-text-muted);
+}
+
+/* One-line caption beneath the value (screenshot parity) */
+.captionSingle {
+    margin: 0;
+    padding: 0 0.2rem;
+    max-width: 100%;
+    font-size: 0.7rem;
+    line-height: 1.35;
+    font-weight: 500;
+    color: var(--color-pure-white);
+
+    @media (min-width: 1024px) {
+        padding: 0 0.75rem;
+        max-width: none;
+        font-size: clamp(0.8rem, 1.85vw, 0.9375rem);
+        line-height: 1.4;
+    }
+}
