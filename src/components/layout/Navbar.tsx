@@ -56,8 +56,11 @@ export function Navbar({ settings }: { settings?: any }) {
   ];
 
   const cmsNav = settings?.mainNavigation;
-  const navLinks =
+  const rawLinks =
     Array.isArray(cmsNav) && cmsNav.length > 0 ? cmsNav : fallbackNavLinks;
+  const navLinks = features.insights
+    ? rawLinks
+    : rawLinks.filter((link: any) => link.href !== "/insights");
   const pathname = usePathname();
 
   return (
