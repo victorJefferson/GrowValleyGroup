@@ -78,13 +78,13 @@
 
 .statsGrid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     max-width: var(--max-width-container);
     margin-inline: auto;
 
     @media (min-width: 768px) {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 2.5rem;
     }
 }
@@ -106,10 +106,11 @@
 
 .statMetric {
     display: block;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--color-pure-white);
-    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--color-text-muted);
+    margin: 0;
 }
 
 .statSupport {
@@ -125,35 +126,53 @@
 }
 
 .painGrid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 1rem;
     max-width: var(--max-width-container);
     margin: 1rem auto 4.5rem;
+
+    @media (min-width: 640px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .painCard {
-    flex: 1 1 100%;
-    max-width: 100%;
-    padding: 1.5rem 1.35rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 1.35rem 1.25rem;
     border-radius: var(--border-radius-card);
     background: hsla(var(--primary-h), 10%, 10%, 0.55);
     border: 1px solid hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.35);
     text-align: left;
+}
 
-    @media (min-width: 720px) {
-        flex: 0 1 calc(33.333% - 0.67rem);
-        max-width: calc(33.333% - 0.67rem);
-    }
+.painCardIcon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-top: 0.1rem;
+    border-radius: 50%;
+    background: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.12);
+    color: var(--color-accent);
 
-    p {
-        margin: 0;
-        font-size: 1rem;
-        line-height: 1.45;
-        font-weight: 500;
-        color: var(--color-pure-white);
+    svg {
+        display: block;
     }
+}
+
+.painCardText {
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--color-pure-white);
 }
 
 .statementCard {
@@ -171,6 +190,39 @@
         font-weight: 600;
         line-height: 1.4;
         color: var(--color-pure-white);
+    }
+}
+
+.statementCardCta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.75rem;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.finaleCard {
+    .finaleTitle {
+        margin: 0 0 1rem;
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+        font-weight: 600;
+        color: var(--color-pure-white);
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+    }
+
+    .finaleCopy {
+        margin: 0 auto 0;
+        max-width: 40rem;
+        font-size: 1.125rem;
+        line-height: 1.55;
+        color: var(--color-text-muted);
+    }
+
+    .statementCardCta {
+        margin-top: 1.75rem;
     }
 }
 
@@ -302,10 +354,20 @@
     background: hsla(var(--primary-h), 10%, 10%, 0.65);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: left;
     position: relative;
     overflow: hidden;
+
+    .featureList {
+        position: relative;
+        margin: 0 0 1rem;
+
+        li {
+            font-size: 0.92rem;
+            color: var(--color-text-muted);
+        }
+    }
 
     &::before {
         content: "";
@@ -332,7 +394,7 @@
 
 .sideHeadline {
     position: relative;
-    margin: 0 0 1.5rem;
+    margin: 0 0 1rem;
     font-size: clamp(1.1rem, 2vw, 1.35rem);
     font-weight: 600;
     line-height: 1.45;
@@ -415,24 +477,6 @@
     font-weight: 600;
     color: var(--color-pure-white);
     line-height: 1.35;
-}
-
-.whoStatement {
-    max-width: 56rem;
-    margin: 0 auto 2rem;
-    padding: clamp(2rem, 5vw, 3rem);
-    border-radius: var(--border-radius-card);
-    background: hsla(var(--primary-h), 10%, 10%, 0.72);
-    border: 1px solid var(--color-border);
-    text-align: center;
-
-    p {
-        margin: 0;
-        font-size: clamp(1.15rem, 2.5vw, 1.65rem);
-        font-weight: 600;
-        line-height: 1.4;
-        color: var(--color-pure-white);
-    }
 }
 
 /* ── Why ── */
@@ -520,13 +564,6 @@
     padding: clamp(4rem, 9vw, 6.5rem) 0;
 }
 
-.expertiseSubhead {
-    margin: 0 0 1.25rem;
-    font-size: 1.05rem;
-    line-height: 1.5;
-    color: var(--color-text-muted);
-}
-
 .expertiseLead {
     margin: 0 auto;
     max-width: 40rem;
@@ -535,17 +572,39 @@
     color: var(--color-text-muted);
 }
 
-.expertiseGrid {
+.expertiseLayout {
+    max-width: var(--max-width-container);
+    margin: 2.5rem auto 0;
+}
+
+.expertiseColumns {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.85rem;
-    max-width: var(--max-width-container);
-    margin: 2.5rem auto 0;
+    align-items: start;
 
     @media (min-width: 768px) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem 1.25rem;
+        gap: 1.25rem;
     }
+}
+
+.expertiseFeatured {
+    margin-top: 0.85rem;
+
+    @media (min-width: 768px) {
+        width: calc(50% - 0.625rem);
+        margin-inline: auto;
+    }
+}
+
+.expertiseColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .expertiseCard {
@@ -577,38 +636,8 @@
     color: var(--color-pure-white);
 }
 
-.expertiseClosing {
-    margin: 0 auto 2rem;
-    max-width: 36rem;
-    text-align: center;
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: var(--color-text-muted);
-}
-
 /* ── Finale ── */
 .finaleBand {
     padding: clamp(4rem, 9vw, 6.5rem) 0;
     padding-bottom: clamp(5rem, 10vw, 7rem);
-}
-
-.finaleInner {
-    max-width: min(48rem, 92vw);
-    margin-inline: auto;
-    text-align: center;
-}
-
-.finaleTitle {
-    margin: 0 0 1rem;
-    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-    font-weight: 600;
-    color: var(--color-pure-white);
-    letter-spacing: -0.02em;
-}
-
-.finaleCopy {
-    margin: 0 auto 2rem;
-    font-size: 1.125rem;
-    line-height: 1.55;
-    color: var(--color-text-muted);
 }

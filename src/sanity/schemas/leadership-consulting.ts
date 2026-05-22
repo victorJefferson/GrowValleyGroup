@@ -23,6 +23,12 @@ export default defineType({
             validation: Rule => Rule.required(),
         }),
         defineField({
+            name: "linkedinUrl",
+            title: "LinkedIn profile URL",
+            description: "Optional. When set, the card on the Leadership page links to this profile.",
+            type: "url",
+        }),
+        defineField({
             name: "title",
             title: "Job Title",
             type: "string",

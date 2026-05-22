@@ -3,7 +3,8 @@ import { Hero } from "@/components/ui/Hero";
 import { Button } from "@/components/ui/Button";
 import { CaseStudiesCarousel } from "@/components/ui/CaseStudiesCarousel";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Crown, Users } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import styles from "./AboutUs.module.scss";
 import { client, urlFor } from "@/lib/sanity";
 import {
@@ -77,28 +78,85 @@ function splitParagraphs(body?: string): string[] {
     .filter(Boolean);
 }
 
-function sectionImageAlt(s: { eyebrow?: string; heading?: string }): string {
-  if (s.heading) return s.heading;
-  if (s.eyebrow) return s.eyebrow;
-  return "";
+function isBulletLine(line: string): boolean {
+  return /^[•\-]\s/.test(line.trim());
 }
 
-function NarrativeBody({ paragraphs, body }: { paragraphs: string[]; body?: string }) {
-  if (paragraphs.length > 0) {
+function stripBullet(line: string): string {
+  return line.trim().replace(/^[•\-]\s*/, "");
+}
+
+function renderParagraphBlock(p: string, key: number) {
+  const lines = p
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const bulletStart = lines.findIndex(isBulletLine);
+
+  if (bulletStart >= 0 && lines.slice(bulletStart).every(isBulletLine)) {
     return (
-      <>
-        {paragraphs.map((p, j) => (
-          <p key={j} className={styles.sectionBody}>
-            {p}
+      <div key={key} className={styles.sectionBlock}>
+        {lines.slice(0, bulletStart).map((line, i) => (
+          <p key={`intro-${i}`} className={styles.sectionBody}>
+            {line}
           </p>
         ))}
-      </>
+        <ul className={styles.sectionList}>
+          {lines.slice(bulletStart).map((line, i) => (
+            <li key={i}>{stripBullet(line)}</li>
+          ))}
+        </ul>
+      </div>
     );
+  }
+
+  if (lines.length > 0 && lines.every(isBulletLine)) {
+    return (
+      <ul key={key} className={styles.sectionList}>
+        {lines.map((line, i) => (
+          <li key={i}>{stripBullet(line)}</li>
+        ))}
+      </ul>
+    );
+  }
+
+  return (
+    <p key={key} className={styles.sectionBody}>
+      {p}
+    </p>
+  );
+}
+
+function NarrativeSectionBody({ body }: { body?: string }) {
+  const paragraphs = splitParagraphs(body);
+  if (paragraphs.length > 0) {
+    return <>{paragraphs.map((p, j) => renderParagraphBlock(p, j))}</>;
   }
   if (body) {
     return <p className={styles.sectionBody}>{body}</p>;
   }
   return null;
+}
+
+function getSubPageIcon(href: string): LucideIcon {
+  if (href.includes("leadership")) return Crown;
+  if (href.includes("team")) return Users;
+  return ArrowRight;
+}
+
+function isAboutUsSelfLink(link: { label?: string; href?: string }): boolean {
+  const href = String(link.href || "")
+    .replace(/\/$/, "")
+    .toLowerCase();
+  const label = String(link.label || "").trim().toLowerCase();
+  return href === "/about-us" || label === "about us";
+}
+
+function sectionImageAlt(s: { eyebrow?: string; heading?: string }): string {
+  if (s.heading) return s.heading;
+  if (s.eyebrow) return s.eyebrow;
+  return "";
 }
 
 function AboutNarrativeSection({
@@ -112,7 +170,6 @@ function AboutNarrativeSection({
   layout: AboutUsNarrativeLayout;
   imageSrc: string;
 }) {
-  const paragraphs = splitParagraphs(s.body);
   const alt = sectionImageAlt(s);
 
   const eyebrowHeading = (
@@ -122,7 +179,7 @@ function AboutNarrativeSection({
     </>
   );
 
-  const bodyBlock = <NarrativeBody paragraphs={paragraphs} body={s.body} />;
+  const bodyBlock = <NarrativeSectionBody body={s.body} />;
 
   const figure = (
     <figure className={styles.sectionFigure}>
@@ -163,8 +220,10 @@ function AboutNarrativeSection({
       return (
         <div className={styles.layoutMediaTop}>
           <header className={styles.layoutMediaTopHeader}>{eyebrowHeading}</header>
-          <div className={styles.layoutMediaTopFigureWrap}>{figure}</div>
-          <div className={styles.layoutMediaTopBody}>{bodyBlock}</div>
+          <div className={styles.layoutMediaTopSplit}>
+            <div className={styles.layoutMediaTopBody}>{bodyBlock}</div>
+            <div className={styles.layoutMediaTopFigureWrap}>{figure}</div>
+          </div>
         </div>
       );
     case "panelSplit":
@@ -226,10 +285,11 @@ export default async function AboutUsPage() {
       ? aboutUsPageSettings.narrativeSections
       : FALLBACK_NARRATIVE;
 
-  const subPagesNav =
+  const subPagesNav = (
     aboutUsPageSettings?.subPagesNav && aboutUsPageSettings.subPagesNav.length > 0
       ? aboutUsPageSettings.subPagesNav
-      : FALLBACK_SUB_PAGES_NAV;
+      : FALLBACK_SUB_PAGES_NAV
+  ).filter((link: { label?: string; href?: string }) => !isAboutUsSelfLink(link));
 
   return (
     <main>
@@ -275,12 +335,21 @@ export default async function AboutUsPage() {
         <section className={`section-padding ${styles.subPagesNavSection}`}>
           <div className="container">
             <div className={styles.subPagesNav}>
-              {subPagesNav.map((link: any, i: number) => (
-                <Link key={i} href={link.href} className={styles.subPagesNavItem}>
-                  <span className={styles.subPagesNavLabel}>{link.label}</span>
-                  <ArrowRight size={20} className={styles.subPagesNavArrow} />
-                </Link>
-              ))}
+              {subPagesNav.map((link: { label?: string; href?: string }, i: number) => {
+                const href = link.href || "#";
+                const Icon = getSubPageIcon(href);
+                return (
+                  <Link key={`${href}-${i}`} href={href} className={styles.subPagesNavItem}>
+                    <span className={styles.subPagesNavIcon} aria-hidden>
+                      <Icon size={22} strokeWidth={1.75} />
+                    </span>
+                    <span className={styles.subPagesNavContent}>
+                      <span className={styles.subPagesNavLabel}>{link.label}</span>
+                    </span>
+                    <ArrowRight size={20} className={styles.subPagesNavArrow} />
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

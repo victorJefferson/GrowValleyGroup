@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
+import { features } from "@/config/features";
 import styles from "./Footer.module.scss";
 
 type FooterLink = { name: string; href: string };
@@ -43,6 +44,7 @@ function FooterLinkList({
         <li key={link.href}>
           <Link
             href={link.href}
+            className={styles.footerNavLink}
             {...(link.href.startsWith("http")
               ? { target: "_blank", rel: "noopener noreferrer" }
               : {})}>
@@ -59,21 +61,33 @@ const LEGAL_LINKS: FooterLink[] = [
   { name: "Terms of Use", href: "/terms-of-use" },
 ];
 
-function splitBalancedColumns(links: FooterLink[]): [FooterLink[], FooterLink[]] {
-  const midpoint = Math.ceil(links.length / 2);
-  return [links.slice(0, midpoint), links.slice(midpoint)];
+function isCompaniesColumn(columnTitle: string | undefined): boolean {
+  const title = columnTitle?.toLowerCase();
+  return title === "companies" || title === "our capabilities";
 }
 
-const REACH_US_HREFS = new Set(["/join-us/careers", "/partner-with-us", "/contact"]);
+function CompaniesFooterLinks({ links }: { links: FooterLink[] }) {
+  if (links.length === 0) return null;
 
-const DEFAULT_COMPANY_COLUMN: FooterColumn = {
-  columnTitle: "Company",
-  links: [
+  return (
+    <FooterLinkList
+      links={links}
+      className={`${styles.desktopNavCol} ${styles.companiesNavCol}`}
+    />
+  );
+}
+
+function getDefaultCompanyLinks(): FooterLink[] {
+  const links: FooterLink[] = [
     { name: "About", href: "/about-us" },
     { name: "Leadership", href: "/about-us/leadership" },
     { name: "Team", href: "/about-us/team" },
-  ],
-};
+  ];
+  if (features.insights) {
+    links.push({ name: "Insights", href: "/insights" });
+  }
+  return links;
+}
 
 const DEFAULT_REACH_US_COLUMN: FooterColumn = {
   columnTitle: "Reach us",
@@ -84,41 +98,9 @@ const DEFAULT_REACH_US_COLUMN: FooterColumn = {
   ],
 };
 
-function isReachUsLink(link: FooterLink): boolean {
-  const name = link.name.toLowerCase();
-  return (
-    REACH_US_HREFS.has(link.href) ||
-    ["careers", "contact", "partner with us"].includes(name) ||
-    name.includes("partner")
-  );
-}
-
-function mergeOrderedLinks(defaults: FooterLink[], current: FooterLink[]): FooterLink[] {
-  const byHref = new Map(current.map((link) => [link.href, link]));
-  const merged = defaults.map((link) => byHref.get(link.href) ?? link);
-  const extra = current.filter((link) => !defaults.some((d) => d.href === link.href));
-  return [...merged, ...extra];
-}
-
-function partitionCompanyLinks(links: FooterLink[]): {
-  companyLinks: FooterLink[];
-  reachUsLinks: FooterLink[];
-} {
-  const reachUsLinks = links.filter(isReachUsLink);
-  const companyLinks = links.filter((link) => !isReachUsLink(link));
-
-  return {
-    companyLinks,
-    reachUsLinks: reachUsLinks.length > 0 ? reachUsLinks : DEFAULT_REACH_US_COLUMN.links!,
-  };
-}
-
 type FooterPillar = { title?: string; slug?: string };
 
-function buildFooterNav(
-  pillars: FooterPillar[],
-  cmsColumns: FooterColumn[] | undefined,
-): FooterColumn[] {
+function buildFooterNav(pillars: FooterPillar[]): FooterColumn[] {
   const capabilityLinks: FooterLink[] = pillars
     .filter((p) => p.title && p.slug)
     .map((p) => ({
@@ -131,18 +113,14 @@ function buildFooterNav(
       ? { columnTitle: "Companies", links: capabilityLinks }
       : null;
 
-  const cmsCompany = cmsColumns?.find((c) => c.columnTitle?.toLowerCase() === "company");
-  const companySource = cmsCompany?.links?.length ? cmsCompany.links : DEFAULT_COMPANY_COLUMN.links!;
-  const { companyLinks, reachUsLinks } = partitionCompanyLinks(companySource);
-
   const companyColumn: FooterColumn = {
     columnTitle: "Company",
-    links: mergeOrderedLinks(DEFAULT_COMPANY_COLUMN.links!, companyLinks),
+    links: getDefaultCompanyLinks(),
   };
 
   const reachUsColumn: FooterColumn = {
     columnTitle: "Reach us",
-    links: mergeOrderedLinks(DEFAULT_REACH_US_COLUMN.links!, reachUsLinks),
+    links: DEFAULT_REACH_US_COLUMN.links!,
   };
 
   return [companyColumn, reachUsColumn, capabilitiesColumn].filter(Boolean) as FooterColumn[];
@@ -166,7 +144,7 @@ export function Footer({
   };
   pillars?: FooterPillar[];
 }) {
-  const footerNav = buildFooterNav(pillars, settings?.footerNavigation);
+  const footerNav = buildFooterNav(pillars);
   const footerCopyright = settings?.footerCopyright ?? "";
   const footerTagline = settings?.footerTagline ?? "";
 
@@ -211,14 +189,23 @@ export function Footer({
 
         {footerNav.length > 0 && (
           <nav className={styles.navGrid} aria-label="Footer navigation">
-            {footerNav.map((column, idx) => (
-              <div
-                key={`${column.columnTitle}-${idx}`}
-                className={`${styles.linksCol} ${idx === 0 ? styles.linksColCapabilities : styles.linksColCompany}`}>
-                <h4>{column.columnTitle}</h4>
-                <FooterLinkList links={column.links ?? []} className={styles.navLinkList} />
-              </div>
-            ))}
+            {footerNav.map((column, idx) => {
+              const links = column.links ?? [];
+              const isCompanies = isCompaniesColumn(column.columnTitle);
+
+              return (
+                <div
+                  key={`${column.columnTitle}-${idx}`}
+                  className={`${styles.linksCol} ${isCompanies ? styles.linksColCapabilities : styles.linksColCompany}`}>
+                  <h4>{column.columnTitle}</h4>
+                  {isCompanies ? (
+                    <CompaniesFooterLinks links={links} />
+                  ) : (
+                    <FooterLinkList links={links} className={styles.navLinkList} />
+                  )}
+                </div>
+              );
+            })}
           </nav>
         )}
 
@@ -226,19 +213,15 @@ export function Footer({
           <nav className={styles.desktopNav} aria-label="Footer navigation">
             {footerNav.map((column, idx) => {
               const links = column.links ?? [];
-              const isCapabilities = column.columnTitle?.toLowerCase() === "companies" || column.columnTitle?.toLowerCase() === "our capabilities";
-              const [colA, colB] = isCapabilities ? splitBalancedColumns(links) : [links, []];
+              const isCompanies = isCompaniesColumn(column.columnTitle);
 
               return (
                 <div
                   key={`desktop-${column.columnTitle}-${idx}`}
                   className={`${styles.desktopNavGroup} ${desktopNavGroupClass(column.columnTitle)}`}>
                   <h3 className={styles.desktopNavHeading}>{column.columnTitle}</h3>
-                  {isCapabilities ? (
-                    <div className={styles.desktopNavColumns}>
-                      <FooterLinkList links={colA} className={styles.desktopNavCol} />
-                      <FooterLinkList links={colB} className={styles.desktopNavCol} />
-                    </div>
+                  {isCompanies ? (
+                    <CompaniesFooterLinks links={links} />
                   ) : (
                     <FooterLinkList links={links} className={styles.desktopNavCol} />
                   )}

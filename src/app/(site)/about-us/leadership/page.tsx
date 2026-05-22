@@ -56,9 +56,15 @@ export default async function LeadershipPage() {
     { name: "Daniel Fischer", role: "Capital Strategy Advisor", image: "/images/people/daniel_fischer.bmp" }
   ];
 
-  const finalLeadership = (leadershipData && leadershipData.length > 0) 
-    ? leadershipData.map((m: any) => ({ name: m.name, role: m.title, image: m.image ? urlFor(m.image).url() : placeholderImg }))
-    : fallbackLeadership;
+  const finalLeadership =
+    leadershipData && leadershipData.length > 0
+      ? leadershipData.map((m: any) => ({
+          name: m.name,
+          role: m.title,
+          image: m.image ? urlFor(m.image).url() : placeholderImg,
+          linkedinUrl: typeof m.linkedinUrl === "string" ? m.linkedinUrl.trim() : "",
+        }))
+      : fallbackLeadership.map((m) => ({ ...m, linkedinUrl: "" }));
 
   const finalAdvisory = (teamData && teamData.length > 0)
     ? teamData.filter((m: any) => m.category === "advisory").map((m: any) => ({ name: m.name, role: m.role, image: m.image ? urlFor(m.image).url() : placeholderImg }))
@@ -77,21 +83,49 @@ export default async function LeadershipPage() {
       <section className="section-padding">
         <div className="container">
           <div className={`${styles.sectionHeader} text-center`}>
-            <h2 className={styles.heading}>The Principals</h2>
+            <h2 className={styles.heading}>Leadership</h2>
           </div>
 
-          <div className={styles.teamGrid}>
-            {finalLeadership.map((member: any, idx: number) => (
-              <div key={idx} className={styles.teamMemberCard}>
-                <div className={styles.memberImage}>
-                  <img src={member.image} alt={member.name} />
-                </div>
-                <div className={styles.memberInfo}>
-                  <h3>{member.name}</h3>
-                  <p>{member.role}</p>
-                </div>
-              </div>
-            ))}
+          <div className={styles.leadershipGrid}>
+            {finalLeadership.map((member: {
+              name: string;
+              role: string;
+              image: string;
+              linkedinUrl?: string;
+            }) => {
+              const linkedin = member.linkedinUrl?.trim();
+              const cardContent = (
+                <>
+                  <div className={styles.memberImage}>
+                    <img src={member.image} alt={member.name} />
+                  </div>
+                  <div className={styles.memberInfo}>
+                    <h3>{member.name}</h3>
+                    <p>{member.role}</p>
+                  </div>
+                </>
+              );
+
+              if (linkedin) {
+                return (
+                  <a
+                    key={member.name}
+                    href={linkedin}
+                    className={`${styles.teamMemberCard} ${styles.teamMemberCardLink}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${member.name} on LinkedIn`}>
+                    {cardContent}
+                  </a>
+                );
+              }
+
+              return (
+                <article key={member.name} className={styles.teamMemberCard}>
+                  {cardContent}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

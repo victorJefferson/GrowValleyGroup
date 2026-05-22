@@ -124,16 +124,14 @@ async function seedSiteSettings() {
                 links: [
                     { name: "About", href: "/about-us" },
                     { name: "Leadership", href: "/about-us/leadership" },
-                    { name: "Insights", href: "/insights" },
-                    { name: "Contact", href: "/contact" },
+                    { name: "Team", href: "/about-us/team" },
                 ],
             },
             {
                 columnTitle: "Reach us",
                 links: [
-                    { name: "Join as Expert", href: "/partner-with-us/experts" },
-                    { name: "Become a Partner", href: "/partner-with-us/partners" },
-                    { name: "Investor Inquiries", href: "/partner-with-us/investors" },
+                    { name: "Careers", href: "/join-us/careers" },
+                    { name: "Partner with us", href: "/partner-with-us" },
                     { name: "Contact", href: "/contact" },
                 ],
             },
@@ -274,10 +272,10 @@ async function seedHomePage() {
     await upsertByTypeAndKey("homePage-consulting", "_type", "homePage-consulting", {
         title: "Home Page Content",
         stats: [
-            { metricValue: "$3B+", metricLabel: "Revenue Influenced", supportingLabel: "" },
-            { metricValue: "$1B+", metricLabel: "Capital Structured", supportingLabel: "" },
+            { metricValue: "$3B+", metricLabel: "Revenue Generated", supportingLabel: "" },
+            { metricValue: "$1B+", metricLabel: "Capital Raised", supportingLabel: "" },
             { metricValue: "500+", metricLabel: "Mandates Delivered", supportingLabel: "" },
-            { metricValue: "5 Companies", metricLabel: "One Integrated System", supportingLabel: "" },
+            { metricValue: "5+", metricLabel: "Companies, One Group", supportingLabel: "" },
         ],
         positioningEyebrow: "The Problem We Solve",
         positioningHeadline: "Businesses today rarely grow through one capability alone.",
@@ -355,10 +353,10 @@ async function seedHomePage() {
         whoClientTypes: [
             { label: "Established Businesses", icon: "building" },
             { label: "Corporations and Enterprises", icon: "briefcase" },
-            { label: "Universities and Institutions", icon: "graduationCap" },
-            { label: "Family Offices", icon: "home" },
-            { label: "Governments and Authorities", icon: "landmark" },
-            { label: "Scale-Stage Startups", icon: "rocket" },
+            { label: "Universities and Institutions", icon: "graduation" },
+            { label: "Family Offices", icon: "family" },
+            { label: "Governments and Authorities", icon: "government" },
+            { label: "Scale-Stage Startups", icon: "trending" },
         ],
         whoPositioningText: "Five specialized companies. One connected ecosystem.",
         whoCtaText: "Talk to Us",
@@ -1032,7 +1030,6 @@ async function seedAboutUsPage() {
             },
         ],
         subPagesNav: [
-            { label: "About Us", href: "/about-us" },
             { label: "Leadership", href: "/about-us/leadership" },
             { label: "Team", href: "/about-us/team" },
         ],

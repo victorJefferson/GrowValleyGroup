@@ -198,7 +198,7 @@ export const homePageRedesign = {
   finaleCtaHref: "/contact",
 };
 
-/** Company column only — Our Capabilities links are built from pillar-consulting in the layout. */
+/** Footer Company / Reach us columns — Companies links come from pillar-consulting in the layout. */
 export const footerNavigationRedesign = [
   {
     columnTitle: "Company",
@@ -206,6 +206,11 @@ export const footerNavigationRedesign = [
       { name: "About", href: "/about-us" },
       { name: "Leadership", href: "/about-us/leadership" },
       { name: "Team", href: "/about-us/team" },
+    ],
+  },
+  {
+    columnTitle: "Reach us",
+    links: [
       { name: "Careers", href: "/join-us/careers" },
       { name: "Partner with us", href: "/partner-with-us" },
       { name: "Contact", href: "/contact" },

@@ -96,6 +96,7 @@ export const leadershipQuery = groq`
   *[_type == "leadership-consulting"] | order(_createdAt asc) {
     _id,
     name,
+    linkedinUrl,
     title,
     bio,
     image,

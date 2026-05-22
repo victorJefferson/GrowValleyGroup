@@ -353,21 +353,64 @@ export function CompanyPageContent({
             {(pillarData.engagementModels?.length > 0 || pillarData.engagementOutcomes?.length > 0) && (
                 <section className={`section-padding ${styles.engagementPanelSection}`}>
                     <div className="container">
-                        <div className={styles.engagementPanel}>
-                            <div className={styles.engagementSplit}>
-                                {pillarData.engagementModels && pillarData.engagementModels.length > 0 && (
-                                    <div className={styles.engagementCol}>
-                                        <h3>{pillarData.engagementModelsHeadline ?? ""}</h3>
-                                        {pillarData.engagementModelsIntro && (
-                                            <p className={styles.engagementIntro}>{pillarData.engagementModelsIntro}</p>
-                                        )}
-                                        <ul className={styles.engagementList}>
-                                            {pillarData.engagementModels.map((item: string, i: number) => (
-                                                <li key={i} className={styles.engagementListItem}>{item}</li>
+                        {(() => {
+                            const hasModels = pillarData.engagementModels?.length > 0;
+                            const hasOutcomes = pillarData.engagementOutcomes?.length > 0;
+                            const isWhyLayout = hasModels !== hasOutcomes;
+
+                            return (
+                        <div
+                            className={[
+                                styles.engagementPanel,
+                                isWhyLayout ? styles.engagementPanelWhy : "",
+                            ]
+                                .filter(Boolean)
+                                .join(" ")}>
+                            <div
+                                className={[
+                                    styles.engagementSplit,
+                                    isWhyLayout ? styles.engagementSplitWhy : "",
+                                    isWhyLayout ? styles.engagementSplitSingle : "",
+                                ]
+                                    .filter(Boolean)
+                                    .join(" ")}>
+                                {hasModels &&
+                                    (isWhyLayout ? (
+                                        <div className={styles.engagementColWhy}>
+                                            <h3 className={styles.engagementWhyTitle}>
+                                                {pillarData.engagementModelsHeadline ?? ""}
+                                            </h3>
+                                            <span className={styles.engagementWhyRule} aria-hidden />
+                                            {splitParagraphs(pillarData.engagementModelsIntro).map((p, i) => (
+                                                <p key={i} className={styles.engagementWhyIntro}>
+                                                    {p}
+                                                </p>
                                             ))}
-                                        </ul>
-                                    </div>
-                                )}
+                                            <ul className={styles.engagementWhyList}>
+                                                {pillarData.engagementModels.map((item: string) => (
+                                                    <li key={item} className={styles.engagementWhyListItem}>
+                                                        {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ) : (
+                                        <div className={styles.engagementCol}>
+                                            <h3>{pillarData.engagementModelsHeadline ?? ""}</h3>
+                                            {splitParagraphs(pillarData.engagementModelsIntro).map((p, i) => (
+                                                <p key={i} className={styles.engagementIntro}>
+                                                    {p}
+                                                </p>
+                                            ))}
+                                            <ul className={styles.engagementList}>
+                                                {pillarData.engagementModels.map((item: string, i: number) => (
+                                                    <li key={i} className={styles.engagementListItem}>
+                                                        {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ))}
                                 {pillarData.engagementOutcomes && pillarData.engagementOutcomes.length > 0 && (
                                     <div className={styles.engagementCol}>
                                         <h3>{pillarData.engagementOutcomesHeadline ?? ""}</h3>
@@ -380,6 +423,8 @@ export function CompanyPageContent({
                                 )}
                             </div>
                         </div>
+                            );
+                        })()}
                     </div>
                 </section>
             )}

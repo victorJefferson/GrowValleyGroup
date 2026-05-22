@@ -55,6 +55,13 @@ export default function HomeContent({ heroData, homePage }: HomeContentProps) {
   const whoClientTypes = arr<WhoClientType>(h.whoClientTypes);
   const whyBullets = arr<string>(h.whyBullets);
   const expertiseItems = arr<string>(h.expertiseItems);
+  const expertiseHasTrailing = expertiseItems.length % 2 === 1;
+  const expertisePairedItems = expertiseHasTrailing
+    ? expertiseItems.slice(0, -1)
+    : expertiseItems;
+  const expertiseTrailingItem = expertiseHasTrailing
+    ? expertiseItems[expertiseItems.length - 1]
+    : null;
 
   const cmsStacked = arr<{ text?: string; muted?: boolean }>(heroData?.stackedLines).filter(
     (l) => l?.text,
@@ -105,8 +112,12 @@ export default function HomeContent({ heroData, homePage }: HomeContentProps) {
                   <ScrollReveal key={`${stat.metricLabel}-${i}`} delay={i * 90} variant="fadeUp">
                     <article className={styles.statItem}>
                       <span className={styles.statValue}>{stat.metricValue}</span>
-                      <span className={styles.statMetric}>{stat.metricLabel}</span>
-                      <p className={styles.statSupport}>{stat.supportingLabel}</p>
+                      {stat.metricLabel ? (
+                        <p className={styles.statMetric}>{stat.metricLabel}</p>
+                      ) : null}
+                      {stat.supportingLabel ? (
+                        <p className={styles.statSupport}>{stat.supportingLabel}</p>
+                      ) : null}
                     </article>
                   </ScrollReveal>
                 ))}
@@ -141,34 +152,33 @@ export default function HomeContent({ heroData, homePage }: HomeContentProps) {
                 <div className={styles.painGrid}>
                   {painPointCards.map((text, idx) => (
                     <article key={`pain-${idx}`} className={styles.painCard}>
-                      <X size={18} aria-hidden strokeWidth={2} style={{ color: "var(--color-accent)", marginBottom: "0.65rem" }} />
-                      <p>{text}</p>
+                      <span className={styles.painCardIcon} aria-hidden>
+                        <X size={18} strokeWidth={2} />
+                      </span>
+                      <p className={styles.painCardText}>{text}</p>
                     </article>
                   ))}
                 </div>
               </ScrollReveal>
             )}
 
-            {str(h.positioningStatement) ? (
+            {(str(h.positioningStatement) || str(h.positioningCtaText)) && (
               <ScrollReveal delay={120}>
                 <div className={styles.statementCard}>
-                  <p>{str(h.positioningStatement)}</p>
+                  {str(h.positioningStatement) ? <p>{str(h.positioningStatement)}</p> : null}
+                  {str(h.positioningCtaText) ? (
+                    <div className={styles.statementCardCta}>
+                      <Link href={str(h.positioningCtaHref) || "/our-capabilities"}>
+                        <Button type="button" variant="advisor" size="lg">
+                          <span>{str(h.positioningCtaText)}</span>
+                          <ArrowRight size={18} aria-hidden strokeWidth={2} />
+                        </Button>
+                      </Link>
+                    </div>
+                  ) : null}
                 </div>
               </ScrollReveal>
-            ) : null}
-
-            {str(h.positioningCtaText) ? (
-              <ScrollReveal delay={160}>
-                <div className={styles.ctaRow}>
-                  <Link href={str(h.positioningCtaHref) || "/our-capabilities"}>
-                    <Button type="button" variant="advisor" size="lg">
-                      <span>{str(h.positioningCtaText)}</span>
-                      <ArrowRight size={18} aria-hidden strokeWidth={2} />
-                    </Button>
-                  </Link>
-                </div>
-              </ScrollReveal>
-            ) : null}
+            )}
           </div>
         </section>
       )}
@@ -200,6 +210,8 @@ export default function HomeContent({ heroData, homePage }: HomeContentProps) {
               <div className={`container ${styles.serviceList}`}>
                 {serviceBlocks.map((block, idx) => {
                   const features = arr<string>(block.featureHighlights);
+                  const sideHeadline =
+                    str(block.shortDescription) || str(block.sideCardHeadline);
                   return (
                     <ScrollReveal key={`${block.title}-${idx}`} delay={idx * 40}>
                       <article
@@ -216,13 +228,6 @@ export default function HomeContent({ heroData, homePage }: HomeContentProps) {
                           {block.supportingCopy ? (
                             <p className={styles.serviceBody}>{block.supportingCopy}</p>
                           ) : null}
-                          {features.length > 0 && (
-                            <ul className={styles.featureList}>
-                              {features.map((f) => (
-                                <li key={f}>{f}</li>
-                              ))}
-                            </ul>
-                          )}
                           {block.pillarHref ? (
                             <Link href={block.pillarHref} className={styles.learnMoreLink}>
                               Learn more about {block.title}{" "}
@@ -235,9 +240,16 @@ export default function HomeContent({ heroData, homePage }: HomeContentProps) {
                             {block.sideCardEyebrow ? (
                               <p className={styles.sideEyebrow}>{block.sideCardEyebrow}</p>
                             ) : null}
-                            {block.sideCardHeadline ? (
-                              <p className={styles.sideHeadline}>{block.sideCardHeadline}</p>
+                            {sideHeadline ? (
+                              <p className={styles.sideHeadline}>{sideHeadline}</p>
                             ) : null}
+                            {features.length > 0 && (
+                              <ul className={styles.featureList}>
+                                {features.map((f) => (
+                                  <li key={`side-${f}`}>{f}</li>
+                                ))}
+                              </ul>
+                            )}
                             {block.sideCardCtaText ? (
                               <Link
                                 href={block.sideCardCtaHref || "/contact"}
@@ -296,27 +308,6 @@ export default function HomeContent({ heroData, homePage }: HomeContentProps) {
                 })}
               </div>
             )}
-
-            {str(h.whoPositioningText) ? (
-              <ScrollReveal delay={100}>
-                <div className={styles.whoStatement}>
-                  <p>{str(h.whoPositioningText)}</p>
-                </div>
-              </ScrollReveal>
-            ) : null}
-
-            {str(h.whoCtaText) ? (
-              <ScrollReveal delay={140}>
-                <div className={styles.ctaRow}>
-                  <Link href={str(h.whoCtaHref) || "/contact"}>
-                    <Button type="button" variant="advisor" size="lg">
-                      <span>{str(h.whoCtaText)}</span>
-                      <ArrowRight size={18} aria-hidden strokeWidth={2} />
-                    </Button>
-                  </Link>
-                </div>
-              </ScrollReveal>
-            ) : null}
           </div>
         </section>
       )}
@@ -377,60 +368,55 @@ export default function HomeContent({ heroData, homePage }: HomeContentProps) {
                 <h2 id="expertise-heading" className={styles.sectionTitle}>
                   {str(h.expertiseHeadline)}
                 </h2>
-                {str(h.expertiseSubheadline) ? (
-                  <p className={styles.expertiseSubhead}>{str(h.expertiseSubheadline)}</p>
-                ) : null}
                 <span className={styles.decorRule} aria-hidden />
-                {str(h.expertiseLead) ? (
-                  <p className={styles.expertiseLead}>{str(h.expertiseLead)}</p>
+                {str(h.expertiseLead) || str(h.expertiseSubheadline) ? (
+                  <p className={styles.expertiseLead}>
+                    {str(h.expertiseLead) || str(h.expertiseSubheadline)}
+                  </p>
                 ) : null}
               </div>
             </ScrollReveal>
 
             {expertiseItems.length > 0 && (
-              <div className={styles.expertiseGrid}>
-                {expertiseItems.map((item, idx) => (
-                  <ScrollReveal
-                    key={item}
-                    delay={idx * 70}
-                    className={styles.gridRevealItem}
-                    variant="fadeUp">
-                    <article className={styles.expertiseCard}>
-                      <span className={styles.expertiseBullet} aria-hidden />
-                      <p className={styles.expertiseCardText}>{item}</p>
-                    </article>
-                  </ScrollReveal>
-                ))}
-              </div>
-            )}
-
-            {str(h.expertiseClosingStatement) ? (
-              <ScrollReveal delay={100}>
-                <p className={styles.expertiseClosing}>{str(h.expertiseClosingStatement)}</p>
-              </ScrollReveal>
-            ) : null}
-
-            {str(h.expertiseCtaText) ? (
-              <ScrollReveal delay={140}>
-                <div className={styles.ctaRow}>
-                  <Link href={str(h.expertiseCtaHref) || "/contact"}>
-                    <Button type="button" variant="advisor" size="lg">
-                      <span>{str(h.expertiseCtaText)}</span>
-                      <ArrowRight size={18} aria-hidden strokeWidth={2} />
-                    </Button>
-                  </Link>
+              <ScrollReveal delay={80}>
+                <div className={styles.expertiseLayout}>
+                  <div className={styles.expertiseColumns}>
+                    {[0, 1].map((col) => (
+                      <ul key={col} className={styles.expertiseColumn}>
+                        {expertisePairedItems
+                          .filter((_, idx) => idx % 2 === col)
+                          .map((item) => (
+                            <li key={item}>
+                              <article className={styles.expertiseCard}>
+                                <span className={styles.expertiseBullet} aria-hidden />
+                                <p className={styles.expertiseCardText}>{item}</p>
+                              </article>
+                            </li>
+                          ))}
+                      </ul>
+                    ))}
+                  </div>
+                  {expertiseTrailingItem ? (
+                    <div className={styles.expertiseFeatured}>
+                      <article className={styles.expertiseCard}>
+                        <span className={styles.expertiseBullet} aria-hidden />
+                        <p className={styles.expertiseCardText}>{expertiseTrailingItem}</p>
+                      </article>
+                    </div>
+                  ) : null}
                 </div>
               </ScrollReveal>
-            ) : null}
+            )}
+
           </div>
         </section>
       )}
 
-      {(str(h.finaleHeadline) || str(h.finaleSupportingCopy)) && (
+      {(str(h.finaleHeadline) || str(h.finaleSupportingCopy) || str(h.finaleCtaText)) && (
         <section className={styles.finaleBand} aria-labelledby="finale-heading">
           <div className="container">
             <ScrollReveal variant="fadeIn">
-              <div className={styles.finaleInner}>
+              <div className={`${styles.statementCard} ${styles.finaleCard}`}>
                 {str(h.finaleHeadline) ? (
                   <h2 id="finale-heading" className={styles.finaleTitle}>
                     {str(h.finaleHeadline)}
@@ -440,7 +426,7 @@ export default function HomeContent({ heroData, homePage }: HomeContentProps) {
                   <p className={styles.finaleCopy}>{str(h.finaleSupportingCopy)}</p>
                 ) : null}
                 {str(h.finaleCtaText) ? (
-                  <div className={styles.ctaRow}>
+                  <div className={styles.statementCardCta}>
                     <Link href={str(h.finaleCtaHref) || "/contact"}>
                       <Button type="button" variant="advisor" size="lg">
                         <span>{str(h.finaleCtaText)}</span>

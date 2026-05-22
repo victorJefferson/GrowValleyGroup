@@ -25,7 +25,14 @@ const serviceBlock = {
       of: [{ type: "string" }],
     }),
     defineField({ name: "sideCardEyebrow", title: "Side card eyebrow", type: "string" }),
-    defineField({ name: "sideCardHeadline", title: "Side card headline", type: "text", rows: 3 }),
+    defineField({
+      name: "sideCardHeadline",
+      title: "Side card headline (optional override)",
+      description:
+        "Shown on the right card only when Short description is empty. Otherwise the site uses Short description for both columns.",
+      type: "text",
+      rows: 3,
+    }),
     defineField({ name: "sideCardCtaText", title: "Side card CTA text", type: "string" }),
     defineField({ name: "sideCardCtaHref", title: "Side card CTA link", type: "string" }),
     defineField({

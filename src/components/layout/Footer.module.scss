@@ -1,4 +1,5 @@
 .footer {
+    --footer-link-gap: 0.5rem;
     background-color: var(--color-surface-1);
     color: var(--color-text-body);
     padding: clamp(2.5rem, 6vw, var(--section-gap)) 0 0;
@@ -153,13 +154,76 @@
 }
 
 .desktopNavGroupCapabilities {
-    .desktopNavColumns {
-        grid-template-columns: repeat(2, max-content);
-        column-gap: clamp(1.75rem, 2.5vw, 2.75rem);
+    align-items: center;
+
+    .desktopNavHeading {
+        align-self: center;
+        text-align: center;
+    }
+}
+
+.footerNavLink {
+    position: relative;
+    display: inline-block;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    color: var(--color-primary-navy);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 1px;
+        background-color: var(--color-accent);
+        transition: width 0.22s ease;
     }
 
-    .desktopNavCol a {
-        white-space: nowrap;
+    &:hover {
+        color: var(--color-pure-white);
+
+        &::after {
+            width: 100%;
+        }
+    }
+}
+
+/* 2-column grid; row-gap matches .desktopNavCol li + li. No li margins (grid gap only). */
+.companiesNavCol {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    column-gap: clamp(1.25rem, 2vw, 2rem);
+    row-gap: var(--footer-link-gap);
+    justify-content: center;
+
+    &.desktopNavCol li + li {
+        margin-top: 0;
+    }
+
+    li {
+        min-height: calc(0.9375rem * 1.4);
+    }
+
+    li:nth-child(odd):not(:only-child) {
+        justify-self: end;
+        text-align: right;
+    }
+
+    li:nth-child(even) {
+        justify-self: start;
+        text-align: left;
+    }
+
+    li:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        text-align: center;
     }
 }
 
@@ -189,38 +253,7 @@
     padding: 0;
 
     li + li {
-        margin-top: 0.5rem;
-    }
-
-    a {
-        position: relative;
-        display: inline-block;
-        font-size: 0.9375rem;
-        font-weight: 500;
-        line-height: 1.4;
-        letter-spacing: 0.01em;
-        color: var(--color-primary-navy);
-        text-decoration: none;
-        transition: color 0.2s ease;
-
-        &::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 1px;
-            background-color: var(--color-accent);
-            transition: width 0.22s ease;
-        }
-
-        &:hover {
-            color: var(--color-pure-white);
-
-            &::after {
-                width: 100%;
-            }
-        }
+        margin-top: var(--footer-link-gap);
     }
 }
 
@@ -325,7 +358,16 @@
     }
 }
 
-.linksColCapabilities,
+.linksColCapabilities {
+    width: 100%;
+    max-width: 22rem;
+    text-align: center;
+
+    h4 {
+        text-align: center;
+    }
+}
+
 .linksColCompany {
     /* mobile-only column wrappers */
 }
