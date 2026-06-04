@@ -66,8 +66,6 @@ const FALLBACK_NARRATIVE = [
 
 const FALLBACK_SUB_PAGES_NAV = [
   { label: "Meet the leadership team", href: "/about-us/leadership" },
-  { label: "The people behind the work", href: "/about-us/team" },
-  { label: "How we have worked with clients", href: "/expertise" },
 ];
 
 function splitParagraphs(body?: string): string[] {
@@ -258,7 +256,7 @@ export default async function AboutUsPage() {
 
   try {
     [heroData, caseStudiesData, aboutUsPageSettings] = await Promise.all([
-      client.fetch(heroQuery, { pageSlug: "about" }),
+      client.fetch(heroQuery, { pageSlug: "about-us" }),
       client.fetch(caseStudiesQuery),
       client.fetch(aboutUsPageQuery),
     ]);

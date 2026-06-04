@@ -29,6 +29,16 @@ const nextConfig: NextConfig = {
         destination: '/our-capabilities/:slug*',
         permanent: true,
       },
+      {
+        source: '/partner-with-us',
+        destination: '/join',
+        permanent: true,
+      },
+      {
+        source: '/partner-with-us/:path*',
+        destination: '/join',
+        permanent: true,
+      },
     ]
   },
 };

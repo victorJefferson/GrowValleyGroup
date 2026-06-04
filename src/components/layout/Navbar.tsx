@@ -18,6 +18,7 @@ import {
 import { ChevronDown } from "lucide-react";
 
 import { features } from "@/config/features";
+import { normalizeMainNavigation } from "@/lib/normalizeMainNavigation";
 
 export function Navbar({ settings }: { settings?: any }) {
   const fallbackNavLinks = [
@@ -28,7 +29,6 @@ export function Navbar({ settings }: { settings?: any }) {
       children: [
         { name: "About GrowValley Group", href: "/about-us", description: "A multi-company ecosystem operating across advisory, investments, venture building, and operational infrastructure." },
         { name: "Leadership", href: "/about-us/leadership", description: "Operators, investors, strategists, and venture builders with experience across advisory, investments, and enterprise development." },
-        { name: "Team", href: "/about-us/team", description: "The people behind the GrowValley Group ecosystem." },
       ]
     },
     {
@@ -43,24 +43,16 @@ export function Navbar({ settings }: { settings?: any }) {
       ]
     },
     ...(features.insights ? [{ name: "Insights", href: "/insights" }] : []),
-    {
-      name: "Join",
-      href: "/partner-with-us",
-      children: [
-        { name: "Experts", href: "/partner-with-us/experts", description: "Experienced operators, advisors, and execution partners across strategy, finance, and venture building." },
-        { name: "Partners", href: "/partner-with-us/partners", description: "Strategic relationships built for long-term alignment across markets, clients, and opportunities." },
-        { name: "Investors", href: "/partner-with-us/investors", description: "Capital with long-term alignment across venture opportunities, private markets, and acquisitions." },
-      ]
-    },
-    { name: "Contact", href: "/contact" },
+    { name: "Join", href: "/join" },
   ];
 
   const cmsNav = settings?.mainNavigation;
   const rawLinks =
     Array.isArray(cmsNav) && cmsNav.length > 0 ? cmsNav : fallbackNavLinks;
+  const normalizedLinks = normalizeMainNavigation(rawLinks);
   const navLinks = features.insights
-    ? rawLinks
-    : rawLinks.filter((link: any) => link.href !== "/insights");
+    ? normalizedLinks
+    : normalizedLinks.filter((link) => link.href !== "/insights");
   const pathname = usePathname();
 
   return (
@@ -118,7 +110,9 @@ export function Navbar({ settings }: { settings?: any }) {
                                   <div className={styles.megaMenuDivider}></div>
 
                                   {/* RIGHT SIDE: Sub-links Grid */}
-                                  <div className={styles.megaMenuGrid}>
+                                  <div
+                                    className={`${styles.megaMenuGrid} ${link.children.length === 2 ? styles.twoColumns : ""}`}
+                                  >
                                     {link.children.map((child: any) => (
                                       <Link
                                         key={child.name}
@@ -137,7 +131,9 @@ export function Navbar({ settings }: { settings?: any }) {
                                 </>
                               ) : (
                                 /* Standard Grid Layout (No Intro) */
-                                <div className={`${styles.megaMenuGrid} ${styles.fullWidth}`}>
+                                <div
+                                  className={`${styles.megaMenuGrid} ${styles.fullWidth} ${link.children.length === 2 ? styles.twoColumns : ""}`}
+                                >
                                   {link.children.map((child: any) => (
                                     <Link
                                       key={child.name}

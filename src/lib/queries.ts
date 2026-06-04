@@ -503,6 +503,36 @@ export const expertisePageQuery = groq`
   }
 `;
 
+export const joinPageQuery = groq`
+  *[_type == "joinPage-consulting"][0] {
+    heroParagraph1,
+    heroParagraph2,
+    heroImage,
+    heroCtaLabel,
+    heroCtaLink,
+    whoHeadline,
+    whoIntro,
+    whoFocusLabel,
+    whoFocusLine,
+    audienceSections[] {
+      key,
+      title,
+      tagline,
+      body,
+      ctaLabel,
+      ctaLink
+    },
+    whyHeadline,
+    whyIntro,
+    whyBullets,
+    whyClosing,
+    closingHeadline,
+    closingBody,
+    closingCtaLabel,
+    closingCtaLink
+  }
+`;
+
 export const partnerPageQuery = groq`
   *[_type == "partnerPage-consulting" && pageKey == $pageKey][0] {
     pageKey,

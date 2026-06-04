@@ -77,8 +77,6 @@ const narrativeSections = [
 
 const subPagesNav = [
   { _key: "n1", label: "Meet the leadership team", href: "/about-us/leadership" },
-  { _key: "n2", label: "The people behind the work", href: "/about-us/team" },
-  { _key: "n3", label: "How we have worked with clients", href: "/expertise" },
 ];
 
 const aboutUsDoc = {

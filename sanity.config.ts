@@ -38,7 +38,7 @@ export default defineConfig({
         title: 'Hero (About Us - Consulting)',
         schemaType: 'hero-consulting',
         value: {
-          pageSlug: 'about',
+          pageSlug: 'about-us',
           hasCTA: true,
           eyebrow: 'ABOUT GROWVALLEY CONSULTING',
           headline: 'We run what your business can\'t afford to get wrong.',

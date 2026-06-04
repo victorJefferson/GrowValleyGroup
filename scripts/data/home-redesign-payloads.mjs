@@ -159,7 +159,7 @@ export const homePageRedesign = {
   whoPositioningText:
     "We don't sell advice. We build systems by integrating growth, capital, and innovation with discipline and execution.",
   whoCtaText: "Work With Us",
-  whoCtaHref: "/partner-with-us",
+  whoCtaHref: "/join",
   whyHeadline: "Why GrowValley",
   whySupportingCopy:
     "We operate at the intersection of business growth, capital strategy, and innovation execution. Our role is not just advisory. We work alongside businesses to structure, scale, and position them for long-term value creation.",
@@ -205,14 +205,12 @@ export const footerNavigationRedesign = [
     links: [
       { name: "About", href: "/about-us" },
       { name: "Leadership", href: "/about-us/leadership" },
-      { name: "Team", href: "/about-us/team" },
     ],
   },
   {
     columnTitle: "Reach us",
     links: [
-      { name: "Careers", href: "/join-us/careers" },
-      { name: "Partner with us", href: "/partner-with-us" },
+      { name: "Join", href: "/join" },
       { name: "Contact", href: "/contact" },
     ],
   },

@@ -5,6 +5,8 @@ import {
     STACKED_LINES_FALLBACK_HOME,
     TRUST_BAR_FALLBACK,
 } from "../../config/homepageContent.defaults";
+import { HeroPageSlugInput } from "../components/HeroPageSlugInput";
+import { isHeroPageSlug } from "../lib/heroPageSlugs";
 
 const homeHeroSeedLines = STACKED_LINES_FALLBACK_HOME.map((line) => ({
     text: line.text,
@@ -33,25 +35,16 @@ export default defineType({
             title: "Page Identifier (Slug)",
             type: "string",
             description: "Select the page this hero belongs to.",
-            options: {
-                list: [
-                    { title: "Home Page", value: "home" },
-                    { title: "About Us", value: "about" },
-                    { title: "Team", value: "team" },
-                    { title: "Leadership", value: "leadership" },
-                    { title: "Capabilities (Hub)", value: "capabilities" },
-                    { title: "Growth Advisory", value: "growth-advisory" },
-                    { title: "Capital Advisory", value: "capital-advisory" },
-                    { title: "Innovation Advisory", value: "innovation-advisory" },
-                    { title: "Project Advisory", value: "project-advisory" },
-                    { title: "Family Office Advisory", value: "family-office-advisory" },
-                    { title: "Expertise", value: "expertise" },
-                    { title: "Partner With Us", value: "partner-with-us" },
-                    { title: "Careers", value: "careers" },
-                    { title: "Contact", value: "contact" },
-                ],
+            components: {
+                input: HeroPageSlugInput,
             },
-            validation: Rule => Rule.required(),
+            validation: (Rule) =>
+                Rule.required().custom((value) => {
+                    if (!value || isHeroPageSlug(value)) {
+                        return true;
+                    }
+                    return "Choose a page from the dropdown.";
+                }),
         }),
         defineField({
             name: "eyebrow",

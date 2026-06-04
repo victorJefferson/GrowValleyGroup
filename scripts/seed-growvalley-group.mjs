@@ -92,7 +92,6 @@ async function seedSiteSettings() {
                 children: [
                     { name: "About GrowValley Group", href: "/about-us", description: "A multi-company ecosystem operating across advisory, investments, venture building, and operational infrastructure." },
                     { name: "Leadership", href: "/about-us/leadership", description: "Operators, investors, strategists, and venture builders with experience across advisory, investments, and enterprise development." },
-                    { name: "Team", href: "/about-us/team", description: "The people behind the GrowValley Group ecosystem." },
                 ],
             },
             {
@@ -107,16 +106,7 @@ async function seedSiteSettings() {
                 ],
             },
             { name: "Insights", href: "/insights" },
-            {
-                name: "Join",
-                href: "/partner-with-us",
-                children: [
-                    { name: "Experts", href: "/partner-with-us/experts", description: "Experienced operators, advisors, and execution partners across strategy, finance, and venture building." },
-                    { name: "Partners", href: "/partner-with-us/partners", description: "Strategic relationships built for long-term alignment across markets, clients, and opportunities." },
-                    { name: "Investors", href: "/partner-with-us/investors", description: "Capital with long-term alignment across venture opportunities, private markets, and acquisitions." },
-                ],
-            },
-            { name: "Contact", href: "/contact" },
+            { name: "Join", href: "/join" },
         ],
         footerNavigation: [
             {
@@ -124,14 +114,12 @@ async function seedSiteSettings() {
                 links: [
                     { name: "About", href: "/about-us" },
                     { name: "Leadership", href: "/about-us/leadership" },
-                    { name: "Team", href: "/about-us/team" },
                 ],
             },
             {
                 columnTitle: "Reach us",
                 links: [
-                    { name: "Careers", href: "/join-us/careers" },
-                    { name: "Partner with us", href: "/partner-with-us" },
+                    { name: "Join", href: "/join" },
                     { name: "Contact", href: "/contact" },
                 ],
             },
@@ -1031,7 +1019,6 @@ async function seedAboutUsPage() {
         ],
         subPagesNav: [
             { label: "Leadership", href: "/about-us/leadership" },
-            { label: "Team", href: "/about-us/team" },
         ],
         ctaHeadline: "Built for companies that intend to scale properly.",
         ctaSubline: "Whether building a venture, deploying capital, expanding internationally, restructuring operations, or scaling long-term enterprise value, GrowValley Group operates through specialized companies designed to work together.",

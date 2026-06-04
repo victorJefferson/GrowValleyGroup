@@ -17,6 +17,7 @@ import legalPageConsulting from "./legalPage-consulting";
 import joinUsPageConsulting from "./joinUsPage-consulting";
 import expertisePageConsulting from "./expertisePage-consulting";
 import partnerPageConsulting from "./partnerPage-consulting";
+import joinPageConsulting from "./joinPage-consulting";
 import consentLog from "./consentLog";
 
 export const schemaTypes = [
@@ -39,5 +40,6 @@ export const schemaTypes = [
     joinUsPageConsulting,
     expertisePageConsulting,
     partnerPageConsulting,
+    joinPageConsulting,
     consentLog,
 ];

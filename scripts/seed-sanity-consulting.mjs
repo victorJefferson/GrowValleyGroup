@@ -161,9 +161,7 @@ tx.createOrReplace({
     },
   ],
   subPagesNav: [
-    { _key: "n1", label: "Team", href: "/about-us/team" },
-    { _key: "n2", label: "Leadership", href: "/about-us/leadership" },
-    { _key: "n3", label: "Capabilities", href: "/our-capabilities" },
+    { _key: "n1", label: "Leadership", href: "/about-us/leadership" },
   ],
   ctaHeadline: "Most operational problems are easier to fix before they compound.",
   ctaSubline:

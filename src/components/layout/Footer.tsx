@@ -81,7 +81,6 @@ function getDefaultCompanyLinks(): FooterLink[] {
   const links: FooterLink[] = [
     { name: "About", href: "/about-us" },
     { name: "Leadership", href: "/about-us/leadership" },
-    { name: "Team", href: "/about-us/team" },
   ];
   if (features.insights) {
     links.push({ name: "Insights", href: "/insights" });
@@ -92,8 +91,7 @@ function getDefaultCompanyLinks(): FooterLink[] {
 const DEFAULT_REACH_US_COLUMN: FooterColumn = {
   columnTitle: "Reach us",
   links: [
-    { name: "Careers", href: "/join-us/careers" },
-    { name: "Partner with us", href: "/partner-with-us" },
+    { name: "Join", href: "/join" },
     { name: "Contact", href: "/contact" },
   ],
 };

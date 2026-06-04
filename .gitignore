@@ -20,6 +20,9 @@
 # production
 /build
 
+# sanity backups
+/sanity-backups/
+
 # misc
 .DS_Store
 *.pem
