@@ -9,7 +9,8 @@ import { MaintenanceMode } from "../../components/ui/MaintenanceMode";
 import { client } from "../../lib/sanity";
 import { serviceCategoriesQuery, siteSettingsQuery } from "../../lib/queries";
 
-export const revalidate = 3600;
+/** Static at build; OpenNext static-assets cache does not support ISR revalidation. */
+export const dynamic = "force-static";
 
 export default async function SiteLayout({
   children,

@@ -4,8 +4,6 @@ import CompaniesContent from './CompaniesContent';
 import { client } from '@/lib/sanity';
 import { heroQuery, capabilitiesPageQuery, solutionsQuery, whoWeWorkWithQuery } from '@/lib/queries';
 
-export const revalidate = 3600;
-
 export const metadata: Metadata = {
     title: {
         absolute: "Companies | GrowValley Group",
