@@ -118,6 +118,9 @@
 
   --max-width-container: 1200px;
 
+  /* Horizontal inset — shared by hero, navbar, and full-bleed sections */
+  --page-gutter-x: 1.5rem;
+
   /* ── Section spacing scale (single source of truth) ──
      Adjust these three values to control all between-section
      vertical space across the entire site. */
@@ -208,6 +211,13 @@ a {
 @media (min-width: 768px) {
   :root {
     --section-gap: var(--section-gap-md);
+    --page-gutter-x: 6vw;
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --page-gutter-x: calc((100vw - 1400px) / 2);
   }
 }
 

@@ -128,16 +128,7 @@
     flex-direction: column;
     justify-content: center;
     /* Horizontal padding lives here, not on the section shell */
-    padding: 0 6vw;
-
-    @media (max-width: 767px) {
-        padding: 0 1.5rem; /* Standard mobile padding */
-    }
-
-    /* On very wide screens, align content with the max-width container */
-    @media (min-width: 1600px) {
-        padding: 0 calc((100vw - 1400px) / 2);
-    }
+    padding: 0 var(--page-gutter-x);
 }
 
 .heroSection.hasTrustRail:not(.isShort) .heroInner {
@@ -279,16 +270,11 @@
     left: 0;
     right: 0;
     z-index: 25;
-    padding: 1.1rem 6vw 1.35rem;
+    padding: 1.1rem var(--page-gutter-x) 1.35rem;
     display: flex;
     align-items: center;
     gap: clamp(0.875rem, 2.5vw, 1.65rem);
     background: linear-gradient(to top, hsla(var(--primary-h), 42%, 3%, 0.28), transparent 70%);
-
-    @media (min-width: 1600px) {
-        padding-left: calc((100vw - 1400px) / 2);
-        padding-right: calc((100vw - 1400px) / 2);
-    }
 }
 
 .trustedLine {

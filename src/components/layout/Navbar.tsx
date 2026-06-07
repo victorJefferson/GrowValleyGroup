@@ -59,7 +59,7 @@ export function Navbar({ settings }: { settings?: any }) {
     <Disclosure as="header" className={styles.header}>
       {({ open, close }) => (
         <>
-          <div className={`container ${styles.navContainer}`}>
+          <div className={styles.navContainer}>
             <div className={styles.logo}>
               <Link href="/">
                 <img
