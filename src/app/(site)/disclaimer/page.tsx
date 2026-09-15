@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Hero } from '@/components/ui/Hero';
 import styles from './Legal.module.scss';
+import { siteConfig } from '@/config/siteConfig';
 
 export const metadata: Metadata = {
     title: {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Disclaimer | GrowValley Group",
         description: "Important notice and informational disclaimer for visitors.",
-        url: "https://gv.consulting/disclaimer",
+        url: `${siteConfig.url}/disclaimer`,
     },
 };
 

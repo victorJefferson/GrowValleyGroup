@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CookiePolicyContent from './CookiePolicyContent';
+import { siteConfig } from '@/config/siteConfig';
 
 export const metadata: Metadata = {
     title: {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Cookie Policy | GrowValley Group",
         description: "GrowValley Group cookie policy.",
-        url: "https://gv.consulting/cookie-policy",
+        url: `${siteConfig.url}/cookie-policy`,
     },
 };
 

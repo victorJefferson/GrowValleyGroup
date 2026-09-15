@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
 import { client } from '@/lib/sanity';
 import { groq } from 'next-sanity';
+import { siteConfig } from '@/config/siteConfig';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://gv.consulting';
+  const baseUrl = siteConfig.url;
 
   const staticRoutes = [
     '',

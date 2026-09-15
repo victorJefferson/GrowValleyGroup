@@ -10,6 +10,7 @@ import {
     getJoinSplitLayout,
 } from "@/lib/joinPageImages";
 import styles from "./Join.module.scss";
+import { siteConfig } from "@/config/siteConfig";
 
 export const metadata: Metadata = {
     title: { absolute: "Join | GrowValley Group" },
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
         title: "Join | GrowValley Group",
         description:
             "An ecosystem of companies, operators, and partnerships designed around execution.",
-        url: "https://gv.consulting/join",
+        url: `${siteConfig.url}/join`,
     },
 };
 

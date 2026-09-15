@@ -7,6 +7,7 @@ import styles from "./Team.module.scss";
 import { client } from "@/lib/sanity";
 import { heroQuery } from "@/lib/queries";
 import { urlFor } from "@/lib/sanity";
+import { siteConfig } from "@/config/siteConfig";
 
 export const metadata: Metadata = {
   title: {
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Our Team | GrowValley Group",
     description: "GrowValley Group advisory team.",
-    url: "https://gv.consulting/team",
+    url: `${siteConfig.url}/team`,
   },
 };
 

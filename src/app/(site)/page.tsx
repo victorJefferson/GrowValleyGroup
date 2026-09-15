@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { client } from "@/lib/sanity";
 import { heroQuery, homePageQuery } from "@/lib/queries";
 import HomeContent from "./HomeContent";
+import { siteConfig } from "@/config/siteConfig";
 
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "GrowValley Group",
     description: "Growth. Capital. Innovation.",
-    url: "https://gv.consulting",
+    url: siteConfig.url,
     images: [
       {
         url: "/images/growvalleyworks.png",

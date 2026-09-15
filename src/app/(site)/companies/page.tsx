@@ -3,6 +3,7 @@ import CompaniesContent from './CompaniesContent';
 
 import { client } from '@/lib/sanity';
 import { heroQuery, capabilitiesPageQuery, solutionsQuery, whoWeWorkWithQuery } from '@/lib/queries';
+import { siteConfig } from '@/config/siteConfig';
 
 export const metadata: Metadata = {
     title: {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
         title: "Companies | GrowValley Group",
         description:
             "The companies behind the GrowValley Group ecosystem.",
-        url: "https://growvalley.com/companies",
+        url: `${siteConfig.url}/companies`,
     },
 };
 

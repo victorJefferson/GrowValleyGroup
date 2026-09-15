@@ -5,6 +5,7 @@ import { client } from '@/lib/sanity';
 import { legalPageQuery } from '@/lib/queries';
 import { PortableText } from '@portabletext/react';
 import { urlFor } from '@/lib/sanity';
+import { siteConfig } from '@/config/siteConfig';
 
 export const metadata: Metadata = {
     title: {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Terms of Use | GrowValley Group",
         description: "GrowValley Group's website terms and conditions.",
-        url: "https://gv.consulting/terms-of-use",
+        url: `${siteConfig.url}/terms-of-use`,
     },
 };
 

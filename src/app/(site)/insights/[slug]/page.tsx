@@ -5,6 +5,7 @@ import { client, urlFor } from "@/lib/sanity";
 import { insightBySlugQuery, insightsQuery } from "@/lib/queries";
 import InsightDetailContent from "./InsightDetailContent";
 import { InsightItem } from "@/components/ui/InsightsCarousel";
+import { siteConfig } from "@/config/siteConfig";
 
 type Props = {
     params: Promise<{ slug: string }>
@@ -31,7 +32,7 @@ export async function generateMetadata(
         openGraph: {
             title: insight.title,
             description: insight.excerpt,
-            url: `https://gv.consulting/insights/${slug}`,
+            url: `${siteConfig.url}/insights/${slug}`,
             images: [
                 insight.mainImage ? urlFor(insight.mainImage).url() : "/images/hero_model_v3.png",
                 ...previousImages,
