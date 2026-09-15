@@ -6,6 +6,7 @@ import { CtaBanner } from "@/components/ui/CtaBanner";
 import { client, urlFor } from "@/lib/sanity";
 import { expertisePageQuery, heroQuery, siteSettingsQuery } from "@/lib/queries";
 import styles from "./Expertise.module.scss";
+import { siteConfig } from "@/config/siteConfig";
 
 function splitParagraphs(text?: string): string[] {
     if (!text?.trim()) return [];
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
         title: "Our Top Expertise | GrowValley Group",
         description:
             "Where growth is being pursued, capital decisions carry weight, and execution discipline becomes essential.",
-        url: "https://gv.consulting/expertise",
+        url: `${siteConfig.url}/expertise`,
     },
 };
 

@@ -5,6 +5,7 @@ import { client } from '@/lib/sanity';
 import { legalPageQuery } from '@/lib/queries';
 import { PortableText } from '@portabletext/react';
 import { urlFor } from '@/lib/sanity';
+import { siteConfig } from '@/config/siteConfig';
 
 export const metadata: Metadata = {
     title: {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Privacy Policy | GrowValley Group",
         description: "GrowValley Group's commitment to data privacy and security.",
-        url: "https://gv.consulting/privacy-policy",
+        url: `${siteConfig.url}/privacy-policy`,
     },
 };
 

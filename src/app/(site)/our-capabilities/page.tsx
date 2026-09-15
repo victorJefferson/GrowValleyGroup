@@ -3,6 +3,7 @@ import CapabilitiesContent from './CapabilitiesContent';
 
 import { client } from '@/lib/sanity';
 import { heroQuery, capabilitiesPageQuery, solutionsQuery, whoWeWorkWithQuery } from '@/lib/queries';
+import { siteConfig } from '@/config/siteConfig';
 
 export const metadata: Metadata = {
     title: {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
         title: "Our Capabilities | GrowValley Group",
         description:
             "Explore GrowValley Group's integrated advisory capabilities.",
-        url: "https://gv.consulting/our-capabilities",
+        url: `${siteConfig.url}/our-capabilities`,
     },
 };
 

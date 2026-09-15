@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { client, urlFor } from "@/lib/sanity";
 import { partnerPageQuery, heroQuery, siteSettingsQuery } from "@/lib/queries";
 import styles from "./PartnerWithUs.module.scss";
+import { siteConfig } from "@/config/siteConfig";
 
 export const metadata: Metadata = {
     title: { absolute: "Partner With Us | GrowValley Group" },
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
         title: "Partner With Us | GrowValley Group",
         description:
             "Long-term, structured partnerships built around execution-led growth.",
-        url: "https://gv.consulting/partner-with-us",
+        url: `${siteConfig.url}/partner-with-us`,
     },
 };
 

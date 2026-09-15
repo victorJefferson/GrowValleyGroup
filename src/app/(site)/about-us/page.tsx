@@ -13,6 +13,7 @@ import {
   aboutUsPageQuery,
 } from "@/lib/queries";
 import { features } from "@/config/features";
+import { siteConfig } from "@/config/siteConfig";
 import {
   getAboutUsNarrativeLayout,
   resolveAboutUsSectionImageUrl,
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     title: "About Us | GrowValley Group",
     description:
       "We run what your business can't afford to get wrong — entity, compliance, payroll, and cross-border infrastructure under one accountable firm.",
-    url: "https://gv.consulting/about-us",
+    url: `${siteConfig.url}/about-us`,
   },
 };
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "../styles/globals.scss";
+import { siteConfig } from "@/config/siteConfig";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -9,7 +10,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://gv.consulting'),
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: "GrowValley Group",
     template: "%s | GrowValley Group"
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://gv.consulting",
+    url: siteConfig.url,
     siteName: "GrowValley Group",
     title: "GrowValley Group",
     description:

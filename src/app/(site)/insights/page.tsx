@@ -9,6 +9,7 @@ import {
     allInsightsQuery,
 } from '@/lib/queries';
 import InsightsContent from "./InsightsContent";
+import { siteConfig } from "@/config/siteConfig";
 
 export const metadata: Metadata = {
     title: {
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
         title: "Insights | GrowValley Group",
         description:
             "Perspectives on strategy, capital, innovation, and execution.",
-        url: "https://gv.consulting/insights",
+        url: `${siteConfig.url}/insights`,
         images: [
             {
                 url: "/images/growvalleyworks.png",

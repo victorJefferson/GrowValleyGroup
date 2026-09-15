@@ -6,6 +6,7 @@ import { joinUsPageQuery } from "@/lib/queries";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import { siteConfig } from "@/config/siteConfig";
 
 function splitParagraphs(text?: string): string[] {
   if (!text?.trim()) return [];
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Careers | GrowValley Group",
     description: "Explore career opportunities at GrowValley Group.",
-    url: "https://gv.consulting/join-us/careers",
+    url: `${siteConfig.url}/join-us/careers`,
   },
 };
 

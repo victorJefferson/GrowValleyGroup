@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactContent from "./ContactContent";
+import { siteConfig } from "@/config/siteConfig";
 
 export const metadata: Metadata = {
     title: {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Contact Us | GrowValley Group",
         description: "Connect with the GrowValley Group team.",
-        url: "https://gv.consulting/contact",
+        url: `${siteConfig.url}/contact`,
     },
 };
 
